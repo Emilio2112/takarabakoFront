@@ -1,8 +1,12 @@
 <template>
   <div>
     <SearchBar :games="games"></SearchBar>
+    <div v-for="(game, idx) in games" :key="idx">
+      {{ idx }}
+    {{ game.name }}
+  </div>
+    <v-btn> Next</v-btn>
 
-    WOLLLLAA
   </div>
 </template>
 
@@ -14,10 +18,17 @@ export default {
   name: "HelloWorld",
 
   data: () => ({
-    games: []
+    games: [],
+    next: "",
+    pages: 0
   }),
   async created() {
-    this.games = await api.getAllGames();
+    const response = await api.getAllGames();
+    this.games = response.results
+    this.next = response.next
+    this.pages = response.count / 40
+  },
+  methods: {
   },
   components: {
     SearchBar,
