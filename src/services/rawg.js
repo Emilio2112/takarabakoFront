@@ -8,7 +8,7 @@ const apiKey = "?key=c6b1f490d3714d018b22b0603ada77ec"
 
 async function getAllGames() {
     try {
-        const response = await API.get(`/games${apiKey}&page_size=8`)
+        const response = await API.get(`/games${apiKey}`)
         return response.data.results
     } catch (error) {
         return {error: error.message} 
