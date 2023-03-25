@@ -5,8 +5,6 @@
       {{ idx }}
     {{ game.name }}
   </div>
-    <v-btn> Next</v-btn>
-
   </div>
 </template>
 
@@ -22,12 +20,12 @@ export default {
     next: "",
     pages: 0
   }),
-  async created() {
+  /*async created() {
     const response = await api.getAllGames();
     this.games = response.results
     this.next = response.next
     this.pages = response.count / 40
-  },
+  },*/
   methods: {
   },
   components: {
