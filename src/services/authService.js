@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useAuthStore } from "../stores/store";
+import { useAuthStore } from "../stores/auth";
 
 const API = axios.create({
     baseURL: "https://takarabako.onrender.com/api",
@@ -13,6 +13,7 @@ async function signup(newUser) {
         const response = await API.post('/auth/signup', newUser)
         return response.data
     } catch (error) {
+        return {error: error.message}
     }
 }
 
