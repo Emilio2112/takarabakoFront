@@ -6,6 +6,7 @@ export const useAuthStore = defineStore('auth', {
     return {
       token: useStorage('token', null),
       email: useStorage('email', null),
+      username: useStorage('username', null),
       role: useStorage('role', null)
     }
   },
@@ -16,6 +17,9 @@ export const useAuthStore = defineStore('auth', {
     userEmail() {
       return this.email
     },
+    userName() {
+      return this.username
+    },
     userRole() {
       return this.role
     }
@@ -24,11 +28,13 @@ export const useAuthStore = defineStore('auth', {
     logout() {
       this.token = null
       this.email = null
+      this.username = null
       this.role = null
     },
-    login(token, email) {
+    login(token, email, username) {
       this.token = token
       this.email = email
+      this.username = username
       },
     roleCheck(role){
       this.role = role

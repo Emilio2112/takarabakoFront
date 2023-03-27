@@ -1,9 +1,13 @@
 <template>
   <v-app>
-    <nav>
+    <nav v-if="!store.token">
       <router-link to="/login">Login</router-link>
        / 
       <router-link to="/signup">Signup</router-link>
+      
+    </nav>
+    <nav v-else> 
+      {{ store.email }} / {{ store.username }}
       <v-btn @click="logout">logout</v-btn>
     </nav>
     <v-main>
@@ -27,6 +31,6 @@ export default {
       this.store.logout();
       this.store.roleCheck(null)
     },
-  }
+  },
 }
 </script>
