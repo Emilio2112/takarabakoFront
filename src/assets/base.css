@@ -1,11 +1,11 @@
 body {
   min-height: 100vh;
-  color: var(--color-text);
-  background: var(--color-background);
+  background-color: #A1ACB4;
   transition: color 0.5s, background-color 0.5s;
   line-height: 1.6;
   font-family: 'Exo', sans-serif;
-  font-size: calc(1em + 1vw);
+  font-size: calc(16px + 1vw);
+  line-height: calc(1.1em + 0.5vw);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

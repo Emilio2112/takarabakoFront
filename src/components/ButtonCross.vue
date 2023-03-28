@@ -1,7 +1,7 @@
 <template>
   <v-btn class="button" rounded="xs">
     Cross
-    <span class="material-icons" id="icon">close</span>
+    <span class="material-icons" id="iconCross">close</span>
   </v-btn>
 </template>
 
@@ -16,7 +16,7 @@ export default {
   background-color: #3e5161;
   color: #a1acb4;
 }
-#icon {
+#iconCross {
     color: #9CADE2
 }
 </style>

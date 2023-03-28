@@ -1,7 +1,7 @@
 <template>
     <v-btn class="button" rounded="xs">
       {{name}}
-      <span class="material-icons" id="icon">change_history</span>
+      <span class="material-icons" id="iconTriangle">change_history</span>
     </v-btn>
   </template>
   
@@ -21,7 +21,7 @@
     background-color: #3e5161;
     color: #a1acb4;
   }
-  #icon {
+  #iconTriangle {
       color: #38DEC6
   }
   </style>

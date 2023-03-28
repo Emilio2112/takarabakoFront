@@ -1,24 +1,20 @@
 <template>
-  <div>
-    <SearchBar :games="games"></SearchBar>
-    <div v-for="(game, idx) in games" :key="idx">
-      {{ idx }}
-    {{ game.name }}
-  </div>
-  </div>
+  <SearchBar :games="games"></SearchBar>
+
 </template>
 
 <script>
-import api from "@/services/rawg.js";
-import SearchBar from "./SearchBar.vue"
+import api from "../services/rawg";
+import SearchBar from "./SearchBar.vue";
+import GameCard from "./GameCard.vue";
 
 export default {
   name: "HelloWorld",
 
   data: () => ({
-    games: [],
+    games: {},
     next: "",
-    pages: 0
+    pages: 0,
   }),
   /*async created() {
     const response = await api.getAllGames();
@@ -26,10 +22,10 @@ export default {
     this.next = response.next
     this.pages = response.count / 40
   },*/
-  methods: {
-  },
+  methods: {},
   components: {
     SearchBar,
-  }
+    GameCard,
+  },
 };
 </script>

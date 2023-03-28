@@ -48,7 +48,6 @@ export default {
         password: this.password,
       };
       const response = await api.login(user);
-      console.log(response);
       if (response.error) {
         alert("Email o contraseña no validos");
       } else {

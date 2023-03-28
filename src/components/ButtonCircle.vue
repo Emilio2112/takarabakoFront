@@ -1,7 +1,7 @@
 <template>
     <v-btn class="button" rounded="xs">
       Circle
-      <span class="material-icons" id="icon">radio_button_unchecked</span>
+      <span class="material-icons" id="iconCircle">radio_button_unchecked</span>
     </v-btn>
   </template>
   
@@ -16,7 +16,7 @@
     background-color: #3e5161;
     color: #a1acb4;
   }
-  #icon {
+  #iconCircle {
       color: #EF6F69
   }
   </style>
