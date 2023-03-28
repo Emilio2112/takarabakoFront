@@ -14,18 +14,20 @@
     </v-card-subtitle>
 
     <v-card-text>
-      <div>{{ game.rating }}</div>
+      <div>{{ game.rating }}
+    {{ game.id }}</div>
     </v-card-text>
 
     <v-card-actions>
-      <v-btn color="orange"> Share </v-btn>
-
-      <v-btn color="orange"> Explore </v-btn>
+      <RouterLink :to="{path: `/game/${game.id}`}">
+        <v-btn color="orange"> Explore </v-btn>
+      </RouterLink>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
+import { RouterLink } from "vue-router";
 export default {
   name: "GameCard",
   props: {
@@ -36,6 +38,6 @@ export default {
 
 <style scoped>
 .title {
-    background-color: #9E9E9E70;
+  background-color: #9e9e9e70;
 }
 </style>

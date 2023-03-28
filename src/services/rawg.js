@@ -24,7 +24,17 @@ async function getGameByName(name, page=1) {
     }
 }
 
+async function getOneGame(id) {
+    try {
+        const response = await API.get(`/games/${id}${apiKey}`)
+        return response.data
+    } catch (error) {
+        return {error: error.message} 
+    }
+}
+
 export default {
     getAllGames,
-    getGameByName
+    getGameByName,
+    getOneGame
 }
