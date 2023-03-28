@@ -8,7 +8,13 @@
     </nav>
     <nav v-else> 
       {{ store.email }} / {{ store.username }}
-      <v-btn @click="logout">logout</v-btn>
+      <ButtonCross @click="logout">
+        Logout
+      </ButtonCross>
+      <ButtonCircle></ButtonCircle>
+      <ButtonSquare></ButtonSquare>
+      <ButtonTriangle>{{ name }}</ButtonTriangle>
+
     </nav>
     <v-main>
       <router-view/>
@@ -19,13 +25,18 @@
 <script>
 import api from './services/authService'
 import { useAuthStore } from './stores/auth'
+import ButtonCross from './components/ButtonCross.vue';
+import ButtonCircle from './components/ButtonCircle.vue';
+import ButtonSquare from './components/ButtonSquare.vue';
+import ButtonTriangle from './components/ButtonTriangle.vue';
 
 export default {
   name: 'App',
 
   data: () => ({
-    store: useAuthStore()
-    
+    store: useAuthStore(),
+    name: "volver"
+
   }),
   methods: {
     logout() {
@@ -33,5 +44,11 @@ export default {
       this.store.roleCheck(null)
     },
   },
+  components: {
+    ButtonCross,
+    ButtonCircle,
+    ButtonSquare,
+    ButtonTriangle
+  }
 }
 </script>
