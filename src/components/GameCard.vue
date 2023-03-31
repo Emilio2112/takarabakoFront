@@ -19,9 +19,7 @@
     </v-card-text>
 
     <v-card-actions>
-      <RouterLink :to="{path: `/game/${game.id}`}">
-        <v-btn color="orange"> Explore </v-btn>
-      </RouterLink>
+      <router-link :to="{path: `/game/${game.id}`}">Vamos</router-link>
     </v-card-actions>
   </v-card>
 </template>

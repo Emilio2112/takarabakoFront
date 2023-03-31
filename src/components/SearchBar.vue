@@ -1,23 +1,48 @@
 <template>
   <div>
-    <input v-model="search" type="text" @keyup.enter="searchGameName" />
-    <button @click="searchGameName">buscar</button>
+
+      <v-text-field
+        v-model="search"
+        focused
+        clearable 
+        @keyup.enter.prevent="searchGameName"
+        label="Busca tus juegos..."
+      >
+      </v-text-field>
+
+      <v-btn class="button" rounded="xs" @click="searchGameName">
+        Buscar
+        <span class="material-icons" id="iconCross">close</span>
+      </v-btn>
+
     <v-row>
       <v-col cols="12" sm="6" md="4" v-for="(game, idx) in games" :key="idx">
         <GameCard :game="game"></GameCard>
       </v-col>
     </v-row>
     <div v-if="games.length" class="text-center">
-      <v-btn v-show="page !=1" class="button" rounded="xs" @click="changePage(page - 1)">
-      Back
-      <span class="material-icons" id="iconTriangle">change_history</span>
-    </v-btn>
-    {{ this.page }} / {{ Math.ceil(pages) }}
-    <v-btn v-show="page != Math.ceil(pages)" class="button" rounded="xs" @click="changePage(page + 1)">
-      Next
-      <span class="material-icons" id="iconCircle">radio_button_unchecked</span>
-    </v-btn>
-  </div>
+      <v-btn
+        v-show="page != 1"
+        class="button"
+        rounded="xs"
+        @click="changePage(page - 1)"
+      >
+        Back
+        <span class="material-icons" id="iconTriangle">change_history</span>
+      </v-btn>
+      {{ this.page }} / {{ Math.ceil(pages) }}
+      <v-btn
+        v-show="page != Math.ceil(pages)"
+        class="button"
+        rounded="xs"
+        @click="changePage(page + 1)"
+      >
+        Next
+        <span class="material-icons" id="iconCircle"
+          >radio_button_unchecked</span
+        >
+      </v-btn>
+    </div>
   </div>
 </template>
 
@@ -33,17 +58,17 @@ export default {
     next: "",
     games: {},
     page: 1,
-    pages: 0
+    pages: 0,
   }),
   methods: {
     async searchGameName() {
       const response = await api.getGameByName(this.search);
-      this.listCount = response.count
+      this.listCount = response.count;
       this.games = response.results;
       this.next = response.next;
       this.pages = response.count / 40;
       if (this.listCount < this.pagesize) {
-        this.historyList = this.games
+        this.historyList = this.games;
       }
     },
     async changePage(page) {
@@ -52,9 +77,9 @@ export default {
       this.games = response.results;
       this.next = response.next;
       this.page = page;
-      window.scrollTo(0,0)
+      window.scrollTo(0, 0);
     },
-	},
+  },
   components: {
     GameCard,
   },
@@ -62,15 +87,18 @@ export default {
 </script>
 
 <style scoped>
-
 .button {
-    background-color: #3e5161;
-    color: #a1acb4;
-  }
-  #iconTriangle {
-      color: #38DEC6
-  }
-  #iconCircle {
-      color: #EF6F69
-  }
+  background-color: #3e5161;
+  color: #a1acb4;
+}
+#iconTriangle {
+  color: #38dec6;
+}
+#iconCircle {
+  color: #ef6f69;
+}
+
+#iconCross {
+  color: #9cade2;
+}
 </style>
