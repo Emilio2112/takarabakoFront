@@ -2,7 +2,6 @@
   <div>
     <h1>{{ game.name }}</h1>
     <h3>{{ game.released }}</h3>
-    {{ removeTags }}
     <div>
         <v-btn class="button" rounded="xs"  @click="addGame" v-show="added">
     Añadir
@@ -13,8 +12,8 @@
 </template>
 
 <script>
-import api from "../services/rawg";
-import API from "../services/games"
+import apiRAWG from "../services/rawg";
+import gamesAPI from "../services/games"
 import usersAPI from "../services/users"
 
 export default {
@@ -26,18 +25,18 @@ export default {
     };
   },
   async created() {
-    const result = await api.getOneGame(this.$route.params.id);
+    const result = await apiRAWG.getOneGame(this.$route.params.id)
     this.game = result;
   },
-  computed: {
+  /*computed: {
     removeTags(str) {
         str = this.game.description
       return str.replace(/(<([^>]+)>)/gi, "");
     },
-  },
+  },*/
   methods: {
     async addGame() {
-        const response = await API.addGame(this.game)
+        const response = await gamesAPI.addGame(this.game)
         if (response._id !== undefined) {
         const res = await usersAPI.addGameToCollection(response._id)
         this.added = false
