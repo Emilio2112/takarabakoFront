@@ -16,12 +16,10 @@
   </v-toolbar>
   <SearchBar v-show="showSearch"></SearchBar>
   <v-navigation-drawer color="#3E5161" v-model="drawer" temporary>
-    <v-list-item
-    
-    >Menú</v-list-item>
+    <v-list-item>Menú</v-list-item>
     <v-divider></v-divider>
     <v-list v-if="!store.token" density="compact" nav>
-      <v-list-item  @click="showSearch = !showSearch">
+      <v-list-item @click="showSearch = !showSearch">
         <router-link to="/login"
           >Login
           <span class="material-icons" id="iconSquare"
@@ -29,7 +27,7 @@
           >
         </router-link>
       </v-list-item>
-      <v-list-item  @click="showSearch = !showSearch">
+      <v-list-item @click="showSearch = !showSearch">
         <router-link to="/signup"
           >Signup
           <span class="material-icons" id="iconTriangle">change_history</span>
@@ -40,20 +38,26 @@
       <v-list-item>
         {{ store.name }}
       </v-list-item>
-      <v-list-item>
-        Mi colección
-        <span class="material-icons" id="iconSquare"
-          >check_box_outline_blank</span
-        >
-      </v-list-item>
-      <v-list-item>
-        Jugando
-        <span class="material-icons" id="iconTriangle">change_history</span>
-      </v-list-item>
-      <v-list-item>
-        Finalizados
-        <span class="material-icons" id="iconCross">close</span>
-      </v-list-item>
+      <RouterLink to="/collection">
+        <v-list-item>
+          Mi colección
+          <span class="material-icons" id="iconSquare"
+            >check_box_outline_blank</span
+          >
+        </v-list-item>
+      </RouterLink>
+      <RouterLink to="/playing">
+        <v-list-item>
+          Jugando
+          <span class="material-icons" id="iconTriangle">change_history</span>
+        </v-list-item>
+      </RouterLink>
+      <RouterLink to="/completed">
+        <v-list-item>
+          Finalizados
+          <span class="material-icons" id="iconCross">close</span>
+        </v-list-item>
+      </RouterLink>
       <v-list-item @click="logout">
         Logout
         <span class="material-icons" id="iconCircle"
@@ -73,19 +77,19 @@ export default {
   data: () => ({
     store: useAuthStore(),
     drawer: false,
-    showSearch: false
+    showSearch: false,
   }),
   methods: {
     logout() {
       this.store.logout();
       this.store.roleCheck(null);
       this.drawer = false;
-      this.showSearch =false
+      this.showSearch = false;
     },
   },
   components: {
-    SearchBar
-  }
+    SearchBar,
+  },
 };
 </script>
 

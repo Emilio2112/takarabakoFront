@@ -4,6 +4,9 @@ import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import SignupView from  '../views/SignupView.vue'
 import GameView from '../views/GameView.vue'
+import CollectionView from '../views/CollectionView.vue'
+import CompletedView from '../views/CompletedView.vue'
+import PlayingView from '../views/PlayingView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -40,6 +43,30 @@ const router = createRouter({
         requiresAuth: false
       }
     },
+    {
+      path: '/collection',
+      name: 'collectionview',
+      component: CollectionView,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/completed',
+      name: 'completedview',
+      component: CompletedView,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/playing',
+      name: 'playingView',
+      component: PlayingView,
+      meta: {
+        requiresAuth: true
+      }
+    }
   ]
 })
 

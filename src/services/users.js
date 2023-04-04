@@ -24,6 +24,39 @@ async function addGameToCollection(id) {
     }
 }
 
+async function viewCollection() {
+    const store = useAuthStore()
+    try {
+        const response = await API.get('users/collection')
+        return response.data
+    } catch (error) {
+        return error
+    }
+}
+
+async function viewPlaying() {
+    const store = useAuthStore()
+    try {
+        const response = await API.get('users/playing')
+        return response.data
+    } catch (error) {
+        return error
+    }
+}
+
+async function viewCompleted() {
+    const store = useAuthStore()
+    try {
+        const response = await API.get('users/completed')
+        return response.data
+    } catch (error) {
+        return error
+    }
+}
+
 export default {
-    addGameToCollection
+    addGameToCollection,
+    viewCollection,
+    viewPlaying,
+    viewCompleted
 }

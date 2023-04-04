@@ -13,7 +13,7 @@
       Buscar
       <span class="material-icons" id="iconCross">close</span>
     </v-btn>
-
+<v-container class="result">
     <v-row>
       <v-col cols="12" sm="6" md="4" v-for="(game, idx) in games" :key="idx">
         <GameCard :game="game" ></GameCard>
@@ -42,6 +42,7 @@
         >
       </v-btn>
     </div>
+  </v-container>
   </v-container>
 </template>
 
@@ -93,7 +94,11 @@ export default {
   right: 0;
   bottom: 0;
   margin: auto;
+  background-color: #a1acb4;
+}
+.result {
   background-color: #3e5161
+
 }
 .button {
   background-color: #3e5161;
