@@ -14,7 +14,22 @@
       <v-icon color="#A1ACB4">mdi-magnify</v-icon>
     </v-btn>
   </v-toolbar>
-  <SearchBar v-show="showSearch"></SearchBar>
+  <v-dialog
+        v-model="showSearch"
+        contained
+        fullscreen
+      >
+      <v-btn class="closeSearch" icon="mdi-window-close" variant="outlined" size="x-large" @click="showSearch = !showSearch">
+  
+</v-btn>
+      <SearchBar class="searchBar"></SearchBar>
+      </v-dialog>
+
+
+
+
+
+
   <v-navigation-drawer color="#3E5161" v-model="drawer" temporary>
     <v-list-item>Menú</v-list-item>
     <v-divider></v-divider>
@@ -89,12 +104,12 @@ export default {
     },
     showMenu() {
       if (this.drawer === true) {
-        this.drawer = false
+        this.drawer = false;
       } else {
-        this.drawer = true
-        this.showSearch = false
+        this.drawer = true;
+        this.showSearch = false;
       }
-    }
+    },
   },
   components: {
     SearchBar,
@@ -106,6 +121,17 @@ export default {
 .toolBar {
   background-color: #3e5161;
 }
+.overlay {
+  justify-items: center;
+
+}
+
+.searchBar{
+  margin-left: 20vw;
+  margin-right: 20vw;
+  width: 60vw;
+  z-index: 3;
+}
 
 .icon {
   color: #a1acb4;
@@ -113,6 +139,12 @@ export default {
 .button {
   background-color: #3e5161;
   color: #a1acb4;
+}
+.closeSearch{
+  color: white;
+  background-color: rgb(179, 174, 174);
+  margin-top: 5em;
+  margin-left: 85%;
 }
 #iconCircle {
   color: #ef6f69;

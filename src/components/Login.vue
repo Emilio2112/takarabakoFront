@@ -1,24 +1,34 @@
 <template>
-  <v-container>
-    <v-sheet width="300" class="mx-auto">
-      <v-form fast-fail @submit.prevent>
-        <v-text-field
-          v-model="email"
-          label="email"
-          :rules="emailRules"
-        ></v-text-field>
-
-        <v-text-field
-          type="password"
-          v-model="password"
-          label="password"
-        ></v-text-field>
-
-        <v-btn @click="userLogin" type="submit" block class="mt-2"
-          >Submit</v-btn
-        >
-      </v-form>
-    </v-sheet>
+  <v-container class="input">
+    <v-form fast-fail @submit.prevent>
+      <v-text-field  v-model="email" label="email" :rules="emailRules">
+      </v-text-field>
+      <v-text-field 
+        type="password"
+        v-model="password"
+        label="password"
+      ></v-text-field>
+      <v-container>
+        <v-row justify="space-around">
+          <v-spacer></v-spacer>
+          <v-col>
+            <v-btn @click="userLogin" type="submit" class="button" rounded="xs"
+              >Login
+              <span class="material-icons" id="iconCross">close</span>
+            </v-btn>
+          </v-col>
+          <v-col>
+            <v-btn class="button" rounded="xs" @click="goBack">
+              Volver
+              <span class="material-icons" id="iconCircle"
+                >radio_button_unchecked</span
+              >
+            </v-btn>
+          </v-col>
+          <v-spacer></v-spacer>
+        </v-row>
+      </v-container>
+    </v-form>
   </v-container>
 </template>
 
@@ -55,8 +65,29 @@ export default {
         this.$router.push({ name: "home" });
       }
     },
+    goBack() {
+      this.$router.go(-1);
+    },
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.input {
+  margin-top: 20vw;
+  position: static;
+}
+.button {
+  background-color: #3e5161;
+  color: #a1acb4;
+  position: static;
+}
+
+#iconCross {
+  color: #9cade2;
+}
+
+#iconCircle {
+  color: #ef6f69;
+}
+</style>

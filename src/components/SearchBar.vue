@@ -1,18 +1,23 @@
 <template>
   <v-container class="search">
-    <v-text-field
-      v-model="search"
-      focused
-      clearable
-      @keyup.enter.prevent="searchGameName"
-      label="Busca tus juegos..."
-    >
-    </v-text-field>
-
-    <v-btn class="button" rounded="xs" @click="searchGameName">
-      Buscar
-      <span class="material-icons" id="iconCross">close</span>
-    </v-btn>
+    <v-row >
+      <v-col cols="12" sm="12" md="10" lg="10">
+        <v-text-field
+          v-model="search"
+          focused
+          clearable
+          @keyup.enter.prevent="searchGameName"
+          label="Busca tus juegos..."
+        >
+        </v-text-field>
+      </v-col>
+      <v-col cols="12" sm="12" md="2" lg="2">
+        <v-btn class="button" rounded="xs" @click="searchGameName">
+          Buscar
+          <span class="material-icons" id="iconCross">close</span>
+        </v-btn>
+      </v-col>
+    </v-row>
 <v-container class="result">
     <v-row>
       <v-col cols="12" sm="6" md="4" v-for="(game, idx) in games" :key="idx">
@@ -88,17 +93,16 @@ export default {
 
 <style scoped>
 .search {
-  position: absolute;
-  top: 2em;
+  top: 4em;
   left: 0;
   right: 0;
-  bottom: 0;
-  margin: auto;
   background-color: #a1acb4;
+  width: 80vw;
+  justify-content: center;
+  position: absolute;
 }
 .result {
-  background-color: #3e5161
-
+  background-color: #3e5161;
 }
 .button {
   background-color: #3e5161;
