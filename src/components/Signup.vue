@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-container>
     <v-sheet width="300" class="mx-auto">
       <v-form fast-fail @submit.prevent>
         <v-text-field
@@ -25,7 +25,7 @@
         >
       </v-form>
     </v-sheet>
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -49,11 +49,11 @@ export default {
   }),
   methods: {
     async signupUser() {
-        const newUser = {
-            email: this.email,
-            username: this.username,
-            password: this.password
-        }
+      const newUser = {
+        email: this.email,
+        username: this.username,
+        password: this.password,
+      };
       const response = await api.signup(newUser);
       if (response.error) {
         alert("Error");

@@ -2,7 +2,7 @@
   <v-toolbar class="toolBar" density="compact">
     <v-app-bar-nav-icon
       color="#A1ACB4"
-      @click="drawer = !drawer"
+      @click="showMenu()"
     ></v-app-bar-nav-icon>
 
     <v-toolbar-title v-if="!store.token">Takarabako</v-toolbar-title>
@@ -19,7 +19,7 @@
     <v-list-item>Menú</v-list-item>
     <v-divider></v-divider>
     <v-list v-if="!store.token" density="compact" nav>
-      <v-list-item @click="showSearch = !showSearch">
+      <v-list-item @click="!showSearch">
         <router-link to="/login"
           >Login
           <span class="material-icons" id="iconSquare"
@@ -27,7 +27,7 @@
           >
         </router-link>
       </v-list-item>
-      <v-list-item @click="showSearch = !showSearch">
+      <v-list-item @click="!showSearch">
         <router-link to="/signup"
           >Signup
           <span class="material-icons" id="iconTriangle">change_history</span>
@@ -85,7 +85,16 @@ export default {
       this.store.roleCheck(null);
       this.drawer = false;
       this.showSearch = false;
+      this.$router.push({ name: "home" });
     },
+    showMenu() {
+      if (this.drawer === true) {
+        this.drawer = false
+      } else {
+        this.drawer = true
+        this.showSearch = false
+      }
+    }
   },
   components: {
     SearchBar,
