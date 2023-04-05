@@ -19,12 +19,7 @@
           <span class="material-icons" id="iconCross">close</span>
         </v-btn>
         <v-spacer></v-spacer>
-        <v-btn class="button" rounded="xs" @click="goBack">
-          Volver
-          <span class="material-icons" id="iconCircle"
-            >radio_button_unchecked</span
-          >
-        </v-btn>
+          <ButtonBack></ButtonBack>
         <v-spacer></v-spacer>
       </v-card-actions>
     </v-form>
@@ -42,6 +37,7 @@
 <script>
 import api from "../services/authService";
 import { useAuthStore } from "../stores/auth";
+import ButtonBack from "./ButtonBack.vue";
 
 export default {
   data: () => ({
@@ -77,6 +73,9 @@ export default {
       this.$router.go(-1);
     },
   },
+  components: {
+    ButtonBack
+  }
 };
 </script>
 
@@ -88,6 +87,7 @@ export default {
 .button {
   background-color: #3e5161;
   color: #a1acb4;
+  box-shadow: inset 0 4px 5px 0 #a1acb48d, 0 5px 10px 1px #000;
 }
 
 #iconCross {
