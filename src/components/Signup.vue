@@ -36,13 +36,7 @@
           >
         </v-btn>
         <v-spacer></v-spacer>
-        <v-btn class="button" rounded="xs">
-          Volver
-          <span class="material-icons" id="iconCircle"
-            >radio_button_unchecked</span
-          >
-        </v-btn>
-
+          <ButtonBack> </ButtonBack>
         <v-spacer></v-spacer>
       </v-card-actions>
     </v-form>
@@ -52,6 +46,7 @@
 <script>
 import api from "../services/authService";
 import { useAuthStore } from "../stores/auth";
+import ButtonBack from "./ButtonBack.vue"
 
 export default {
   data: () => ({
@@ -90,6 +85,9 @@ export default {
       this.password = null
     }
   },
+  components : {
+    ButtonBack
+  }
 };
 </script>
 
