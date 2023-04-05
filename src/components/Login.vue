@@ -90,6 +90,10 @@ export default {
   box-shadow: inset 0 4px 5px 0 #a1acb48d, 0 5px 10px 1px #000;
 }
 
+.button:active {
+  box-shadow: inset 0 5px 6px 5px #000, 0 0 0 0;
+}
+
 #iconCross {
   color: #9cade2;
 }
