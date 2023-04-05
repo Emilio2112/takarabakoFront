@@ -1,24 +1,24 @@
 <template>
   <v-card class="search">
-    <v-container class="search">
-    <v-row >
-      <v-col cols="12" sm="12" md="10" lg="10">
-        <v-text-field
-          v-model="search"
-          focused
-          clearable
-          @keyup.enter.prevent="searchGameName"
-          label="Busca tus juegos..."
-        >
-        </v-text-field>
-      </v-col>
-      <v-col cols="12" sm="12" md="2" lg="2">
-        <v-btn class="button" rounded="xs" @click="searchGameName">
-          Buscar
-          <span class="material-icons" id="iconCross">close</span>
-        </v-btn>
-      </v-col>
-    </v-row>
+    <v-container>
+      <v-row align-content="center">
+        <v-col cols="12" sm="12" md="10" lg="10">
+          <v-text-field
+            v-model="search"
+            focused
+            clearable
+            @keyup.enter.prevent="searchGameName"
+            label="Busca tus juegos..."
+          >
+          </v-text-field>
+        </v-col>
+        <v-col cols="12" sm="12" md="2" lg="2">
+          <v-btn class="button" rounded="xs" @click="searchGameName">
+            Buscar
+            <span class="material-icons" id="iconCross">close</span>
+          </v-btn>
+        </v-col>
+      </v-row>
     </v-container>
     <v-divider></v-divider>
     <v-card-text v-show="pages !== 0" style="height: 70vw">
@@ -28,6 +28,39 @@
         </v-col>
       </v-row>
     </v-card-text>
+    <v-card-actions v-if="games.length">
+      <v-container>
+        <v-row justify="space-around">
+          <v-col cols="2">
+            <v-btn
+              v-show="page != 1"
+              class="button"
+              rounded="xs"
+              @click="changePage(page - 1)"
+            >
+              Back
+              <span class="material-icons" id="iconTriangle"
+                >change_history</span
+              >
+            </v-btn>
+          </v-col>
+          <v-col cols="2"> {{ this.page }} / {{ Math.ceil(pages) }} </v-col>
+          <v-col cols="2">
+            <v-btn
+              v-show="page != Math.ceil(pages)"
+              class="button"
+              rounded="xs"
+              @click="changePage(page + 1)"
+            >
+              Next
+              <span class="material-icons" id="iconCircle"
+                >radio_button_unchecked</span
+              >
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-card-actions>
     <v-divider></v-divider>
   </v-card>
 
