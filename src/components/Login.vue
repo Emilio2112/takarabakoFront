@@ -81,7 +81,7 @@ export default {
 
 <style scoped>
 .input {
-  margin-top: 20vw;
+  margin-top: 5vw;
   position: static;
 }
 .button {

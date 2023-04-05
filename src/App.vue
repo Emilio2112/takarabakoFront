@@ -30,6 +30,6 @@ export default {
   background-color: #a1acb4;
 }
 .main {
-  margin-top: 10vw;
+  margin-top: 60px;
 }
 </style>
