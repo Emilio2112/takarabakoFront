@@ -1,52 +1,56 @@
 <template>
   <v-container class="input">
-    Introduce tus datos
-    <v-form fast-fail @submit.prevent>
-      <v-text-field
-        type="text"
-        v-model="username"
-        label="username"
-      ></v-text-field>
+    <v-row justify="center">
+      <v-col cols="12" sm="12" md="12" lg="8">
+        Introduce tus datos
+        <v-form fast-fail @submit.prevent>
+          <v-text-field
+            type="text"
+            v-model="username"
+            label="username"
+          ></v-text-field>
 
-      <v-text-field
-        v-model="email"
-        label="email"
-        :rules="emailRules"
-      ></v-text-field>
+          <v-text-field
+            v-model="email"
+            label="email"
+            :rules="emailRules"
+          ></v-text-field>
 
-      <v-text-field
-        :type="show1 ? 'text' : 'password'"
-        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-        @click:append="show1 = !show1"
-        v-model="password"
-        counter
-        label="password"
-      ></v-text-field>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn class="button" rounded="xs">
-          Registro
-          <span class="material-icons" id="iconCross">close</span>
-        </v-btn>
-        <v-spacer></v-spacer>
-        <v-btn class="button" rounded="xs" @click="clean">
-          Borrar
-          <span class="material-icons" id="iconSquare"
-            >check_box_outline_blank</span
-          >
-        </v-btn>
-        <v-spacer></v-spacer>
-          <ButtonBack> </ButtonBack>
-        <v-spacer></v-spacer>
-      </v-card-actions>
-    </v-form>
+          <v-text-field
+            :type="show1 ? 'text' : 'password'"
+            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+            @click:append="show1 = !show1"
+            v-model="password"
+            counter
+            label="password"
+          ></v-text-field>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn class="button" rounded="xs">
+              Registro
+              <span class="material-icons" id="iconCross">close</span>
+            </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn class="button" rounded="xs" @click="clean">
+              Borrar
+              <span class="material-icons" id="iconSquare"
+                >check_box_outline_blank</span
+              >
+            </v-btn>
+            <v-spacer></v-spacer>
+            <ButtonBack> </ButtonBack>
+            <v-spacer></v-spacer>
+          </v-card-actions>
+        </v-form>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
 <script>
 import api from "../services/authService";
 import { useAuthStore } from "../stores/auth";
-import ButtonBack from "./ButtonBack.vue"
+import ButtonBack from "./ButtonBack.vue";
 
 export default {
   data: () => ({
@@ -80,14 +84,14 @@ export default {
       }
     },
     clean() {
-      this.username = null
-      this.email = null
-      this.password = null
-    }
+      this.username = null;
+      this.email = null;
+      this.password = null;
+    },
   },
-  components : {
-    ButtonBack
-  }
+  components: {
+    ButtonBack,
+  },
 };
 </script>
 

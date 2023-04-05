@@ -1,33 +1,41 @@
 <template>
   <v-container class="input">
-    Acceso a Takarabako
-    <v-form fast-fail @submit.prevent>
-      <v-text-field v-model="email" label="email" autofocus :rules="emailRules">
-      </v-text-field>
-      <v-text-field
-        :type="show1 ? 'text' : 'password'"
-        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-        @click:append="show1 = !show1"
-        v-model="password"
-        counter
-        label="password"
-      ></v-text-field>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn @click="userLogin" type="submit" class="button" rounded="xs"
-          >Login
-          <span class="material-icons" id="iconCross">close</span>
-        </v-btn>
-        <v-spacer></v-spacer>
-          <ButtonBack></ButtonBack>
-        <v-spacer></v-spacer>
-      </v-card-actions>
-    </v-form>
+    <v-row justify="center">
+      <v-col cols="12" sm="12" md="12" lg="8">
+        Acceso a Takarabako
+        <v-form fast-fail @submit.prevent>
+          <v-text-field
+            v-model="email"
+            label="email"
+            autofocus
+            :rules="emailRules"
+          >
+          </v-text-field>
+          <v-text-field
+            :type="show1 ? 'text' : 'password'"
+            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+            @click:append="show1 = !show1"
+            v-model="password"
+            counter
+            label="password"
+          ></v-text-field>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn @click="userLogin" type="submit" class="button" rounded="xs"
+              >Login
+              <span class="material-icons" id="iconCross">close</span>
+            </v-btn>
+            <v-spacer></v-spacer>
+            <ButtonBack></ButtonBack>
+            <v-spacer></v-spacer>
+          </v-card-actions>
+        </v-form>
+      </v-col>
+    </v-row>
   </v-container>
   <v-container>
     <v-row justify="end">
-      <v-col 
-      cols="3">
+      <v-col cols="4" xs="12" sm="5" md="4">
         <RouterLink to="/signup">Quiero registrarme</RouterLink>
       </v-col>
     </v-row>
@@ -74,8 +82,8 @@ export default {
     },
   },
   components: {
-    ButtonBack
-  }
+    ButtonBack,
+  },
 };
 </script>
 
