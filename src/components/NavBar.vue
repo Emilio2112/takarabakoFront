@@ -14,21 +14,12 @@
       <v-icon color="#A1ACB4">mdi-magnify</v-icon>
     </v-btn>
   </v-toolbar>
-  <v-dialog
-        v-model="showSearch"
-        contained
-        fullscreen
-      >
-      <v-btn class="closeSearch" icon="mdi-window-close" variant="outlined" size="x-large" @click="showSearch = !showSearch">
-  
-</v-btn>
-      <SearchBar class="searchBar"></SearchBar>
-      </v-dialog>
 
+  <!-- <SearchBar v-model="showSearch" class="searchBar"></SearchBar> -->
 
-
-
-
+  <v-dialog class="dialog" v-model="showSearch" scrollable>
+    <SearchBar></SearchBar>
+  </v-dialog>
 
   <v-navigation-drawer color="#3E5161" v-model="drawer" temporary>
     <v-list-item>Menú</v-list-item>
@@ -121,16 +112,10 @@ export default {
 .toolBar {
   background-color: #3e5161;
 }
-.overlay {
+.dialog {
   justify-items: center;
-
-}
-
-.searchBar{
-  margin-left: 20vw;
-  margin-right: 20vw;
-  width: 60vw;
-  z-index: 3;
+  left: 10vw;
+  right: 10vw;
 }
 
 .icon {
@@ -140,7 +125,7 @@ export default {
   background-color: #3e5161;
   color: #a1acb4;
 }
-.closeSearch{
+.closeSearch {
   color: white;
   background-color: rgb(179, 174, 174);
   margin-top: 5em;

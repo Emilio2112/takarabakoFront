@@ -1,5 +1,37 @@
 <template>
-  <v-container class="search">
+  <v-card class="search">
+    <v-container class="search">
+    <v-row >
+      <v-col cols="12" sm="12" md="10" lg="10">
+        <v-text-field
+          v-model="search"
+          focused
+          clearable
+          @keyup.enter.prevent="searchGameName"
+          label="Busca tus juegos..."
+        >
+        </v-text-field>
+      </v-col>
+      <v-col cols="12" sm="12" md="2" lg="2">
+        <v-btn class="button" rounded="xs" @click="searchGameName">
+          Buscar
+          <span class="material-icons" id="iconCross">close</span>
+        </v-btn>
+      </v-col>
+    </v-row>
+    </v-container>
+    <v-divider></v-divider>
+    <v-card-text v-show="pages !== 0" style="height: 70vw">
+      <v-row>
+        <v-col cols="12" sm="6" md="4" v-for="(game, idx) in games" :key="idx">
+          <GameCard :game="game"></GameCard>
+        </v-col>
+      </v-row>
+    </v-card-text>
+    <v-divider></v-divider>
+  </v-card>
+
+  <!-- <v-container class="search">
     <v-row >
       <v-col cols="12" sm="12" md="10" lg="10">
         <v-text-field
@@ -48,7 +80,7 @@
       </v-btn>
     </div>
   </v-container>
-  </v-container>
+  </v-container> -->
 </template>
 
 <script>
@@ -93,13 +125,8 @@ export default {
 
 <style scoped>
 .search {
-  top: 4em;
-  left: 0;
-  right: 0;
   background-color: #a1acb4;
   width: 80vw;
-  justify-content: center;
-  position: absolute;
 }
 .result {
   background-color: #3e5161;
