@@ -2,7 +2,7 @@
   <v-app class="app">
     <NavBar/>
 
-    <v-main>
+    <v-main class="main">
       <router-view />
     </v-main>
   </v-app>
@@ -28,5 +28,8 @@ export default {
 <style scoped>
 .app {
   background-color: #a1acb4;
+}
+.main {
+  margin-top: 10vw;
 }
 </style>

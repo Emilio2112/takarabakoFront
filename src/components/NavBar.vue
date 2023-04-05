@@ -111,6 +111,7 @@ export default {
 <style scoped>
 .toolBar {
   background-color: #3e5161;
+  position:fixed
 }
 .dialog {
   justify-items: center;
