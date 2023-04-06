@@ -17,7 +17,7 @@ async function getAllGames() {
 
 async function getGameByName(name, page=1) {
     try {
-        const response = await API.get(`/games${apiKey}&search=${name}&page_size=40&page=${page}`)
+        const response = await API.get(`/games${apiKey}&search=${name}&page_size=30&page=${page}`)
         return response.data
     } catch (error) {
         return {error: error.message} 

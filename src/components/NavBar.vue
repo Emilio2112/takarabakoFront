@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar class="toolBar" density="compact">
+  <v-app-bar class="toolBar" density="compact" color="#3e5161">
     <v-app-bar-nav-icon
       color="#A1ACB4"
       @click="showMenu()"
@@ -13,7 +13,7 @@
     <v-btn icon @click="showSearch = !showSearch">
       <v-icon color="#A1ACB4">mdi-magnify</v-icon>
     </v-btn>
-  </v-toolbar>
+  </v-app-bar>
 
   <!-- <SearchBar v-model="showSearch" class="searchBar"></SearchBar> -->
 
@@ -25,9 +25,9 @@
     <v-list-item>Menú</v-list-item>
     <v-divider></v-divider>
     <v-list v-if="!store.token" density="compact" nav>
-      <v-list-item @click="!showSearch">
+      <v-list-item @click="!showSearch" :to="{name: login}">
         <router-link to="/login"
-          >Login
+        style="text-decoration: none">Login
           <span class="material-icons" id="iconSquare"
             >check_box_outline_blank</span
           >
@@ -35,7 +35,7 @@
       </v-list-item>
       <v-list-item @click="!showSearch">
         <router-link to="/signup"
-          >Signup
+        style="text-decoration: none">Signup
           <span class="material-icons" id="iconTriangle">change_history</span>
         </router-link></v-list-item
       >
@@ -45,7 +45,7 @@
         {{ store.name }}
       </v-list-item>
       <RouterLink to="/collection">
-        <v-list-item>
+        <v-list-item style="text-decoration: none">
           Mi colección
           <span class="material-icons" id="iconSquare"
             >check_box_outline_blank</span
@@ -53,18 +53,18 @@
         </v-list-item>
       </RouterLink>
       <RouterLink to="/playing">
-        <v-list-item>
+        <v-list-item style="text-decoration: none">
           Jugando
           <span class="material-icons" id="iconTriangle">change_history</span>
         </v-list-item>
       </RouterLink>
       <RouterLink to="/completed">
-        <v-list-item>
+        <v-list-item style="text-decoration: none">
           Finalizados
           <span class="material-icons" id="iconCross">close</span>
         </v-list-item>
       </RouterLink>
-      <v-list-item @click="logout">
+      <v-list-item @click="logout" style="text-decoration: none">
         Logout
         <span class="material-icons" id="iconCircle"
           >radio_button_unchecked</span
