@@ -30,7 +30,7 @@
         md="4"
         lg="4"
       >
-        <v-card class="card" max-width="400" elevation="20">
+        <v-card class="card" max-width="400" elevation="20" :to="{name: 'gameCollectionView', params: {id: game._id}}" >
           <v-img
             :src="game.background_image"
             class="align-end text-white"
@@ -55,13 +55,12 @@
       </v-col>
     </v-row>
     <v-row v-else>
-      <v-col cols="12" xs="6" sm="6" md="6" lg="6" max-width="400">
-        <v-card class="list"
+      <v-col cols="12" xs="6" sm="6" md="6" lg="6" max-width="400" v-for="(game, idx) in games"
+          :key="idx">
+        <v-card
           color="#76858F"
           elevation="20"
-          v-for="(game, idx) in games"
-          :key="idx"
-        >
+          :to="{name: 'gameCollectionView', params: {id: game._id}}" >
           <v-card-text>
             {{ game.name }}
           </v-card-text>
@@ -116,10 +115,6 @@ export default {
 <style scoped>
 .card {
   background-color: #76858f;
-}
-
-.list{
-    margin-bottom: 4%;
 }
 
 .title {

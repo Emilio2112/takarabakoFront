@@ -7,6 +7,7 @@ import GameView from '../views/GameView.vue'
 import CollectionView from '../views/CollectionView.vue'
 import CompletedView from '../views/CompletedView.vue'
 import PlayingView from '../views/PlayingView.vue'
+import GameCollectionView from '../views/GameCollectionView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -63,6 +64,14 @@ const router = createRouter({
       path: '/playing',
       name: 'playingView',
       component: PlayingView,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/collection/:id',
+      name: 'gameCollectionView',
+      component: GameCollectionView,
       meta: {
         requiresAuth: true
       }

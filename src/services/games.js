@@ -22,6 +22,22 @@ async function addGame(newGame) {
     }
 }
 
+async function getGame(id) {
+    const store = useAuthStore()
+    try {
+        const response = await API.get(`/games/${id}`, {
+            headers: {
+                token: store.token
+            }
+        })
+        return response.data
+    } catch (error) {
+        return {error: error.message}
+    }
+}
+    
+
 export default {
-    addGame
+    addGame,
+    getGame
 }
