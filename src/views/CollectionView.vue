@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row justify="space-between">
-      <v-col cols="6">Mi colección<br>{{ games.length }} juegos</v-col>
+      <v-col cols="6">Mi colección<br />{{ games.length }} juegos</v-col>
       <v-col cols="4">
         <div class="d-flex flex-column align-center">
           <v-btn-toggle v-model="toggle" mandatory>
@@ -30,7 +30,7 @@
         md="4"
         lg="4"
       >
-        <v-card class="card" max-width="400" elevation="20" hover>
+        <v-card class="card" max-width="400" elevation="20">
           <v-img
             :src="game.background_image"
             class="align-end text-white"
@@ -55,8 +55,8 @@
       </v-col>
     </v-row>
     <v-row v-else>
-      <v-col cols="12" xs="4" sm="4" md="4" lg="4" max-width="400">
-        <v-card
+      <v-col cols="12" xs="6" sm="6" md="6" lg="6" max-width="400">
+        <v-card class="list"
           color="#76858F"
           elevation="20"
           v-for="(game, idx) in games"
@@ -69,9 +69,9 @@
       </v-col>
     </v-row>
     <v-row>
-        <v-col>
-            <ButtonBack></ButtonBack>
-        </v-col>
+      <v-col>
+        <ButtonBack></ButtonBack>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -108,14 +108,18 @@ export default {
     },
   },
   components: {
-    ButtonBack
-  }
+    ButtonBack,
+  },
 };
 </script>
 
 <style scoped>
 .card {
   background-color: #76858f;
+}
+
+.list{
+    margin-bottom: 4%;
 }
 
 .title {
