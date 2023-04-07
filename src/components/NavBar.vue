@@ -25,45 +25,45 @@
     <v-list-item>Menú</v-list-item>
     <v-divider></v-divider>
     <v-list v-if="!store.token" density="compact" nav>
-      <v-list-item @click="!showSearch" :to="{name: login}">
-        <router-link to="/login"
-        style="text-decoration: none">Login
+      <v-list-item @click="!showSearch" :to="{ name: 'login' }">
+        Login
           <span class="material-icons" id="iconSquare"
             >check_box_outline_blank</span
           >
-        </router-link>
       </v-list-item>
-      <v-list-item @click="!showSearch">
-        <router-link to="/signup"
-        style="text-decoration: none">Signup
+      <v-list-item @click="!showSearch" :to="{ name: 'signup' }">
+          Signup
           <span class="material-icons" id="iconTriangle">change_history</span>
-        </router-link></v-list-item
+</v-list-item
       >
     </v-list>
     <v-list v-else>
       <v-list-item>
         {{ store.name }}
       </v-list-item>
-      <RouterLink to="/collection">
-        <v-list-item style="text-decoration: none">
-          Mi colección
-          <span class="material-icons" id="iconSquare"
-            >check_box_outline_blank</span
-          >
-        </v-list-item>
-      </RouterLink>
-      <RouterLink to="/playing">
-        <v-list-item style="text-decoration: none">
-          Jugando
-          <span class="material-icons" id="iconTriangle">change_history</span>
-        </v-list-item>
-      </RouterLink>
-      <RouterLink to="/completed">
-        <v-list-item style="text-decoration: none">
-          Finalizados
-          <span class="material-icons" id="iconCross">close</span>
-        </v-list-item>
-      </RouterLink>
+      <v-list-item
+        style="text-decoration: none"
+        :to="{ name: 'collectionView' }"
+      >
+        Mi colección
+        <span class="material-icons" id="iconSquare"
+          >check_box_outline_blank</span
+        >
+      </v-list-item>
+
+      <v-list-item :to="{ name: 'playingView' }">
+        Jugando
+        <span class="material-icons" id="iconTriangle">change_history</span>
+      </v-list-item>
+
+      <v-list-item
+        
+        :to="{ name: 'completedView' }"
+      >
+        Finalizados
+        <span class="material-icons" id="iconCross">close</span>
+      </v-list-item>
+
       <v-list-item @click="logout" style="text-decoration: none">
         Logout
         <span class="material-icons" id="iconCircle"
@@ -111,7 +111,7 @@ export default {
 <style scoped>
 .toolBar {
   background-color: #3e5161;
-  position:fixed
+  position: fixed;
 }
 .dialog {
   justify-items: center;

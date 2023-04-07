@@ -24,7 +24,7 @@
     <v-card-text v-show="pages !== 0" style="height: 70vw">
       <v-container>
       <v-row>
-        <v-col cols="12" sm="6" md="4" v-for="(game, idx) in games" :key="idx">
+        <v-col cols="12" sm="6" md="4" lg="4" v-for="(game, idx) in games" :key="idx">
           <GameCard :game="game"></GameCard>
         </v-col>
       </v-row>

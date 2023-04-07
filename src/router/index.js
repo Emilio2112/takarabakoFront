@@ -45,7 +45,7 @@ const router = createRouter({
     },
     {
       path: '/collection',
-      name: 'collectionview',
+      name: 'collectionView',
       component: CollectionView,
       meta: {
         requiresAuth: true
@@ -53,7 +53,7 @@ const router = createRouter({
     },
     {
       path: '/completed',
-      name: 'completedview',
+      name: 'completedView',
       component: CompletedView,
       meta: {
         requiresAuth: true
