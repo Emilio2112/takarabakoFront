@@ -2,7 +2,7 @@
   <div>
     <h1>{{ game.name }}</h1>
     <h3>{{ game.released }}</h3>
-    <div>{{ removeTags }}</div>
+    <div>{{ game.description }}</div>
     <div>
         <v-btn class="button" rounded="xs"  @click="addGame" v-show="added">
     Añadir
@@ -28,17 +28,18 @@ export default {
   async created() {
     const result = await apiRAWG.getOneGame(this.$route.params.id)
     this.game = result;
+    this.game.description = this.game.description.replace(/(<([^>]+)>)/gi, "")
   },
   async beforeUpdate() {
     const result = await apiRAWG.getOneGame(this.$route.params.id)
     this.game = result;
   },
-  computed: {
+  /*computed: {
     removeTags(str) {
         str = this.game.description
       return str.replace(/(<([^>]+)>)/gi, "");
     },
-  },
+  },*/
   methods: {
     async addGame() {
         const response = await gamesAPI.addGame(this.game)

@@ -21,11 +21,11 @@
         </div>
       </v-col>
     </v-row>
-    <v-row v-if="listView">
+    <v-row v-if="cardView">
       <v-col
         v-for="(game, idx) in games"
         :key="idx"
-        cols="12"
+        cols="6"
         sm="6"
         md="4"
         lg="4"
@@ -55,7 +55,7 @@
       </v-col>
     </v-row>
     <v-row v-else>
-      <v-col cols="12" xs="6" sm="6" md="6" lg="6" max-width="400" v-for="(game, idx) in games"
+      <v-col cols="6" offset="3" xs="6" sm="6" md="6" lg="6" max-width="400" v-for="(game, idx) in games"
           :key="idx">
         <v-card
           color="#76858F"
@@ -91,6 +91,7 @@ export default {
   async created() {
     const result = await usersAPI.viewCollection();
     this.games = result;
+    this.listView = true
   },
   methods: {
     viewList() {
