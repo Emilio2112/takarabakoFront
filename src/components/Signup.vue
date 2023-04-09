@@ -1,5 +1,8 @@
 <template>
-  <v-container class="input">
+  <v-container v-if="loading">
+    <Loader></Loader>
+  </v-container>
+  <v-container v-else class="input">
     <v-row justify="center">
       <v-col cols="12" sm="12" md="12" lg="8">
         Introduce tus datos
@@ -26,7 +29,7 @@
           ></v-text-field>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn class="button" rounded="xs">
+            <v-btn class="button" rounded="xs" @click="signupUser()">
               Registro
               <span class="material-icons" id="iconCross">close</span>
             </v-btn>
@@ -51,6 +54,7 @@
 import api from "../services/authService";
 import { useAuthStore } from "../stores/auth";
 import ButtonBack from "./ButtonBack.vue";
+import Loader from "./Loader.vue";
 
 export default {
   data: () => ({
@@ -67,6 +71,7 @@ export default {
     ],
     authStore: useAuthStore(),
     show1: false,
+    loading: false
   }),
   methods: {
     async signupUser() {
@@ -75,6 +80,7 @@ export default {
         username: this.username,
         password: this.password,
       };
+      this.loading = true
       const response = await api.signup(newUser);
       if (response.error) {
         alert("Error");
@@ -91,6 +97,7 @@ export default {
   },
   components: {
     ButtonBack,
+    Loader
   },
 };
 </script>

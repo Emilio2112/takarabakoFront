@@ -1,13 +1,16 @@
 <template>
-  <v-container class="input">
+  <v-container v-if="loading">
+    <Loader></Loader>
+  </v-container>
+
+  <v-container v-else class="input">
     <v-row justify="center">
       <v-col cols="12" sm="12" md="12" lg="8">
         Acceso a Takarabako
-        <v-form fast-fail @submit.prevent>
+        <v-form fast-fail @submit.prevent="userLogin">
           <v-text-field
             v-model="email"
             label="email"
-            autofocus
             :rules="emailRules"
           >
           </v-text-field>
@@ -21,7 +24,7 @@
           ></v-text-field>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn @click="userLogin" type="submit" class="button" rounded="xs"
+            <v-btn type="submit" class="button" rounded="xs"
               >Login
               <span class="material-icons" id="iconCross">close</span>
             </v-btn>
@@ -32,8 +35,6 @@
         </v-form>
       </v-col>
     </v-row>
-  </v-container>
-  <v-container>
     <v-row justify="end">
       <v-col cols="4" xs="12" sm="5" md="4">
         <RouterLink to="/signup">Quiero registrarme</RouterLink>
@@ -46,6 +47,7 @@
 import api from "../services/authService";
 import { useAuthStore } from "../stores/auth";
 import ButtonBack from "./ButtonBack.vue";
+import Loader from "../components/Loader.vue";
 
 export default {
   data: () => ({
@@ -62,6 +64,7 @@ export default {
     username: "",
     authStore: useAuthStore(),
     show1: false,
+    loading: false,
   }),
   methods: {
     async userLogin() {
@@ -69,9 +72,11 @@ export default {
         email: this.email,
         password: this.password,
       };
+      this.loading = true;
       const response = await api.login(user);
       if (response.error) {
         alert("Email o contraseña no validos");
+        this.loading = false
       } else {
         this.authStore.login(response.token, response.email, response.username);
         this.$router.push({ name: "home" });
@@ -83,6 +88,7 @@ export default {
   },
   components: {
     ButtonBack,
+    Loader,
   },
 };
 </script>
