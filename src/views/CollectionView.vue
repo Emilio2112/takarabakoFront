@@ -1,72 +1,6 @@
 <template>
   <v-container>
-    <v-row justify="space-between">
-      <v-col cols="6">Mi colección<br />{{ games.length }} juegos</v-col>
-      <v-col cols="4">
-        <div class="d-flex flex-column align-center">
-          <v-btn-toggle v-model="toggle" mandatory>
-            <v-btn
-              class="button"
-              icon="mdi-view-headline"
-              value="List"
-              @click="viewList"
-            ></v-btn>
-            <v-btn
-              class="button"
-              icon="mdi-view-module"
-              value="Cards"
-              @click="viewCard"
-            ></v-btn>
-          </v-btn-toggle>
-        </div>
-      </v-col>
-    </v-row>
-    <v-row v-if="cardView">
-      <v-col
-        v-for="(game, idx) in games"
-        :key="idx"
-        cols="6"
-        sm="6"
-        md="4"
-        lg="4"
-      >
-        <v-card class="card" max-width="400" elevation="20" :to="{name: 'gameCollectionView', params: {id: game._id}}" >
-          <v-img
-            :src="game.background_image"
-            class="align-end text-white"
-            height="200"
-            cover
-          >
-            <v-card-title class="title">
-              {{ game.name }}
-            </v-card-title>
-          </v-img>
-          <v-card-text>
-            <v-chip
-              class="chip ma-1"
-              variant="elevated"
-              v-for="(platform, idx) in game.platforms"
-              :key="idx"
-            >
-              {{ platform.platform.name }}
-            </v-chip>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-    <v-row v-else>
-      <v-col cols="6" offset="3" xs="6" sm="6" md="6" lg="6" max-width="400" v-for="(game, idx) in games"
-          :key="idx">
-        <v-card
-          color="#76858F"
-          elevation="20"
-          :to="{name: 'gameCollectionView', params: {id: game._id}}" >
-          <v-card-text>
-            {{ game.name }}
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
+    <Collection :games="games"></Collection>
     <v-row>
       <v-col>
         <ButtonBack></ButtonBack>
@@ -78,6 +12,7 @@
 <script>
 import usersAPI from "../services/users";
 import ButtonBack from "../components/ButtonBack.vue";
+import Collection from "../components/Collection.vue"
 
 export default {
   data() {
@@ -91,7 +26,7 @@ export default {
   async created() {
     const result = await usersAPI.viewCollection();
     this.games = result;
-    this.listView = true
+    this.listView = true;
   },
   methods: {
     viewList() {
@@ -109,6 +44,7 @@ export default {
   },
   components: {
     ButtonBack,
+    Collection
   },
 };
 </script>
