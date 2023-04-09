@@ -37,7 +37,7 @@
 </v-list-item
       >
     </v-list>
-    <v-list v-else>
+    <v-list v-else density="compact" nav>
       <v-list-item>
         {{ store.name }}
       </v-list-item>
@@ -45,7 +45,7 @@
         style="text-decoration: none"
         :to="{ name: 'collectionView' }"
       >
-        Mi colección
+        Colección
         <span class="material-icons" id="iconSquare"
           >check_box_outline_blank</span
         >
