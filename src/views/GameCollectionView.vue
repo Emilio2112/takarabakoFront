@@ -129,6 +129,7 @@ import authAPI from "../services/authService";
 import usersAPI from "../services/users";
 import gamesAPI from "../services/games";
 import Loader from "../components/Loader.vue";
+import confetti from "https://esm.run/canvas-confetti@1";
 
 export default {
   data() {
@@ -154,6 +155,10 @@ export default {
     async addGameToCompletedList() {
       await usersAPI.addGameToCompleted(this.game._id);
       this.showButtonCompleted = false;
+      confetti({
+        particleCount: 150,
+        spread: 60,
+      });
     },
   },
   computed: {

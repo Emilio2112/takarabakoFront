@@ -30,6 +30,7 @@ export default {
   },
   async created() {
     const result = await usersAPI.viewCompleted();
+    this.loading = false
     this.games = result;
   },
   components: {
