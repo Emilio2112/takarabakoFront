@@ -12,7 +12,7 @@
                 <v-card-title> Rating </v-card-title>
                 <v-card-text>
                   <h1 class="rating font-weight-black text-center">
-                    {{ game.rating }}
+                    {{ ratingMedia }}
                   </h1>
                   <h3 class="rating">/5</h3>
                 </v-card-text>
@@ -36,7 +36,7 @@
     </v-row>
     <v-row>
       <v-col>
-        <h2>Released: {{ game.released }}</h2>
+        <h2>Released: {{ releasedDate }}</h2>
       </v-col>
     </v-row>
     <v-row>
@@ -54,20 +54,66 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-sheet
-        rounded
-        class="pa-6 mx-auto" color="#76858F">
+        <v-sheet rounded class="pa-6 mx-auto" color="#76858F">
           <p>
-          {{ game.description }}
-        </p>
+            {{ descriptionFixed }}
+          </p>
         </v-sheet>
       </v-col>
     </v-row>
     <v-row justify="space-around">
       <v-col cols="auto">
-        <v-btn class="button" rounded="xs" @click="addGameToPlayingList()">
+        <v-btn
+          v-if="isPlaying"
+          class="button"
+          rounded="xs"
+          @click="addGameToPlayingList"
+        >
           Playing
           <span class="material-icons" id="iconCross">close</span>
+          <v-dialog activator="parent" width="auto">
+            <v-card color="#76858F" class="pa-4">
+              <v-card-text> Game added to playing list </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                  class="button"
+                  rounded="xs"
+                  :to="{ name: 'collectionView' }"
+                  >Close<span class="material-icons" id="iconTriangle"
+                    >change_history
+                  </span>
+                </v-btn>
+                <v-spacer></v-spacer>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-btn>
+        <v-btn
+          v-if="isCompleted"
+          @click="addGameToCompletedList"
+          class="button"
+          rounded="xs"
+          >Completed<span class="material-icons" id="iconSquare"
+            >check_box_outline_blank
+          </span>
+          <v-dialog activator="parent" width="auto">
+            <v-card color="#76858F" class="pa-4">
+              <v-card-text> Game Completed </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                  class="button"
+                  rounded="xs"
+                  :to="{ name: 'collectionView' }"
+                  >Close<span class="material-icons" id="iconTriangle"
+                    >change_history</span
+                  >
+                </v-btn>
+                <v-spacer></v-spacer>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </v-btn>
       </v-col>
       <v-col cols="auto">
@@ -79,6 +125,7 @@
 
 <script>
 import ButtonBack from "../components/ButtonBack.vue";
+import authAPI from "../services/authService";
 import usersAPI from "../services/users";
 import gamesAPI from "../services/games";
 import Loader from "../components/Loader.vue";
@@ -87,39 +134,81 @@ export default {
   data() {
     return {
       game: {},
-      loading: true
+      user: [],
+      loading: true,
+      showButtonPlaying: false,
+      showButtonCompleted: false,
     };
   },
   async created() {
     this.game = await gamesAPI.getGame(this.$route.params.id);
-    this.loading = false
-    this.game.description = this.game.description
-      .replace(/(<([^>]+)>)/gi, "")
-      .replace(/&gt;/g, ">")
-      .replace(/&lt;/g, "<")
-      .replace(/&#039;/g, "'")
-      .replace(/&#39;/g, "'")
-      .replace(/&quot;/g, '"')
-      .replace(/&amp;/g, "&");
-    let res =
-      this.game.rating.reduce((acc, cur) => acc + cur) /
-      this.game.rating.length;
-    if (res % 1 === 0) {
-      this.game.rating = res;
-    } else {
-      this.game.rating = res.toFixed(1);
-    }
-    this.game.released = this.game.released.slice(0, 10);
+    this.user = await authAPI.getUser();
+    this.loading = false;
   },
   methods: {
     async addGameToPlayingList() {
-      const response = await usersAPI.addGameToPlaying(this.game._id);
+      await usersAPI.addGameToPlaying(this.game._id);
+      this.showButtonPlaying = false;
+      this.showButtonCompleted = true;
+    },
+    async addGameToCompletedList() {
+      await usersAPI.addGameToCompleted(this.game._id);
+      this.showButtonCompleted = false;
+    },
+  },
+  computed: {
+    isPlaying() {
+      if (
+        this.user.playing.includes(this.game._id) ||
+        this.user.completed.includes(this.game._id)
+      ) {
+        this.showButtonPlaying = false;
+        return this.showButtonPlaying;
+      } else {
+        this.showButtonPlaying = true;
+        return this.showButtonPlaying;
+      }
+    },
+    isCompleted() {
+      if (
+        this.user.completed.includes(this.game._id) === false &&
+        this.user.playing.includes(this.game._id)
+      ) {
+        this.showButtonCompleted = true;
+        return this.showButtonCompleted;
+      } else {
+        this.showButtonCompleted = false;
+        return this.showButtonCompleted;
+      }
+    },
+    descriptionFixed() {
+      return (this.game.description = this.game.description
+        .replace(/(<([^>]+)>)/gi, "")
+        .replace(/&gt;/g, ">")
+        .replace(/&lt;/g, "<")
+        .replace(/&#039;/g, "'")
+        .replace(/&#39;/g, "'")
+        .replace(/&quot;/g, '"')
+        .replace(/&amp;/g, "&"));
+    },
+    releasedDate() {
+      return (this.game.released = this.game.released.slice(0, 10));
+    },
+    ratingMedia() {
+      let res =
+        this.game.rating.reduce((acc, cur) => acc + cur) /
+        this.game.rating.length;
+      if (res % 1 === 0) {
+        return (this.game.rating = res);
+      } else {
+        return (this.game.rating = res.toFixed(1));
+      }
     },
   },
   components: {
     ButtonBack,
-    Loader
-},
+    Loader,
+  },
 };
 </script>
 
@@ -143,5 +232,11 @@ export default {
 }
 #iconCross {
   color: #9cade2;
+}
+#iconTriangle {
+  color: #38dec6;
+}
+#iconSquare {
+  color: #d591bf;
 }
 </style>

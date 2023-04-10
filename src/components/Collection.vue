@@ -1,7 +1,7 @@
 <template>
     <v-container>
       <v-row justify="space-between">
-        <v-col cols="6">Mi colección<br />{{ games.length }} juegos</v-col>
+        <v-col cols="6">{{ games.length }} Games</v-col>
         <v-col cols="4">
           <div class="d-flex flex-column align-center">
             <v-btn-toggle v-model="toggle" mandatory>
@@ -25,9 +25,10 @@
         <v-col
           v-for="(game, idx) in games"
           :key="idx"
-          cols="6"
-          sm="6"
-          md="4"
+          cols="12"
+          xs="12"
+          sm="8"
+          md="6"
           lg="4"
         >
           <v-card class="card" max-width="400" elevation="20" :to="{name: 'gameCollectionView', params: {id: game._id}}" >
@@ -54,12 +55,14 @@
           </v-card>
         </v-col>
       </v-row>
-      <v-row v-else>
-        <v-col cols="6" offset="3" xs="6" sm="6" md="6" lg="6" max-width="400" v-for="(game, idx) in games"
-            :key="idx">
+      <v-row justify="center" v-else>
+        <v-col cols="12" xs="6" sm="8" md="8" lg="6">
           <v-card
+          v-for="(game, idx) in games"
+            :key="idx"
             color="#76858F"
             elevation="20"
+            class="ma-6"
             :to="{name: 'gameCollectionView', params: {id: game._id}}" >
             <v-card-text>
               {{ game.name }}

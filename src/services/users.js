@@ -27,7 +27,21 @@ async function addGameToCollection(id) {
 async function addGameToPlaying(id) {
     const store = useAuthStore()
     try {
-        const response = await API.patch('/playing/add', {_id:id}, {
+        const response = await API.patch('users/playing/add', {_id:id}, {
+            headers: {
+                token: store.token
+            }
+        })
+        return response.data
+    } catch (error) {
+        return error
+    }
+}
+
+async function addGameToCompleted(id) {
+    const store = useAuthStore()
+    try {
+        const response = await API.patch('users/completed/add', {_id:id}, {
             headers: {
                 token: store.token
             }
@@ -85,5 +99,6 @@ export default {
     viewCollection,
     viewPlaying,
     viewCompleted,
-    addGameToPlaying
+    addGameToPlaying,
+    addGameToCompleted
 }
