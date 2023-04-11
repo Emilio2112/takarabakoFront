@@ -1,6 +1,6 @@
 <template>
     <v-btn class="button" rounded="xs" @click="goBack">
-      Volver
+      Back
       <span class="material-icons" id="iconCircle">radio_button_unchecked</span>
     </v-btn>
   </template>

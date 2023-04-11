@@ -12,7 +12,7 @@
           >
           </v-text-field>
         </v-col>
-        <v-col cols="12" sm="12" md="2" lg="2">
+        <v-col cols="12" sm="6" md="2" lg="2">
           <v-btn class="button" rounded="xs" @click="searchGameName">
             Buscar
             <span class="material-icons" id="iconCross">close</span>
