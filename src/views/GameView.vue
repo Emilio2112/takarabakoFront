@@ -62,10 +62,10 @@
 
       
 
-        <v-btn class="button" rounded="xs" @click="addGame" v-show="added">
+        <!-- <v-btn class="button" rounded="xs" @click="addGame" v-show="added"> 
           Añadir
           <span class="material-icons" id="iconCross">close</span>
-        </v-btn>
+        </v-btn>-->
 
   </v-container>
 </template>
@@ -86,12 +86,12 @@ export default {
   async created() {
     const result = await apiRAWG.getOneGame(this.$route.params.id);
     this.game = result;
-    this.game.description = this.game.description.replace(/(<([^>]+)>)/gi, "");
   },
-  async beforeUpdate() {
+  async updated() {
     const result = await apiRAWG.getOneGame(this.$route.params.id);
     this.game = result;
   },
+  
   computed: {
     descriptionFixed() {
       return (this.game.description = this.game.description

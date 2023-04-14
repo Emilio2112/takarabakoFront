@@ -33,9 +33,18 @@ async function getOneGame(id) {
     }
 }
 
+async function getGameScreenshots(id) {
+    try {
+        const response = await API.get(`/games/${id}/screenshots${apiKey}`)
+        return response.data.results
+    } catch (error) {
+        return {error: error.message} 
+    }
+}
 
 export default {
     getAllGames,
     getGameByName,
-    getOneGame
+    getOneGame,
+    getGameScreenshots
 }
