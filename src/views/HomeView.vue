@@ -1,11 +1,8 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col>
-        <V-card>
-          <v-img src="@/assets/takaralogo.jpg">
-          </v-img>
-        </V-card>
+    <v-row justify="center">
+      <v-col cols="10" md="8" xl="8" >
+        <v-img src="../public/takaralogo.jpg"></v-img>
       </v-col>
     </v-row>
   </v-container>
@@ -18,3 +15,7 @@ export default {
   data: () => ({}),
 };
 </script>
+
+<style>
+
+</style>

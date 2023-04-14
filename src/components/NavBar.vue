@@ -38,9 +38,6 @@
       >
     </v-list>
     <v-list v-else density="compact" nav>
-      <v-list-item>
-        {{ store.name }}
-      </v-list-item>
       <v-list-item
         style="text-decoration: none"
         :to="{ name: 'collectionView' }"

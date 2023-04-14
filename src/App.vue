@@ -5,12 +5,14 @@
     <v-main class="main">
       <router-view />
     </v-main>
+    <Footer></Footer>
   </v-app>
 </template>
 
 <script>
 import { RouterLink, RouterView } from "vue-router";
 import NavBar from "../src/components/NavBar.vue";
+import Footer from "./components/Footer.vue";
 
 
 
@@ -20,7 +22,8 @@ export default {
   data: () => ({
   }),
   components: {
-    NavBar
+    NavBar,
+    Footer
   }
 };
 </script>
