@@ -7,7 +7,7 @@
     </v-row>
     <v-row>
       <v-col>
-      <h1>{{ game.name }}</h1>
+        <h1>{{ game.name }}</h1>
       </v-col>
     </v-row>
     <v-row>
@@ -17,13 +17,17 @@
     </v-row>
     <v-row>
       <v-col>
-        <a :href="game.website" style="text-decoration: none" target="_blank" rel="noopener noreferrer">{{ game.name }} <v-icon icon="mdi-web"></v-icon></a>
+        <a
+          :href="game.website"
+          style="text-decoration: none"
+          target="_blank"
+          rel="noopener noreferrer"
+          >{{ game.name }} <v-icon icon="mdi-web"></v-icon
+        ></a>
       </v-col>
     </v-row>
     <v-row>
-      <v-col>
-        Original name: {{ game.name_original }}
-      </v-col>
+      <v-col> Original name: {{ game.name_original }} </v-col>
     </v-row>
     <v-row>
       <v-col>
@@ -41,32 +45,35 @@
     <v-row>
       <v-col cols="2" align-self="center">
         <v-img src="../public/metascore.png" aspect-ratio="1"></v-img>
-        </v-col>
-        <v-col cols="2" align-self="center">
-        <a :href="game.metacritic_url" style="text-decoration: none" target="_blank" rel="noopener noreferrer"><h1>{{ game.metacritic }}</h1></a>
+      </v-col>
+      <v-col cols="2" align-self="center">
+        <a
+          :href="game.metacritic_url"
+          style="text-decoration: none"
+          target="_blank"
+          rel="noopener noreferrer"
+          ><h1>{{ game.metacritic }}</h1></a
+        >
       </v-col>
     </v-row>
     <v-row>
-      <v-col>
-        ESRB: {{ game.esrb_rating.name }}
-      </v-col>
+      <v-col> </v-col>
     </v-row>
     <v-row>
-      {{ game.reactions }}
-    </v-row>
-    <v-row>
-      <v-col>
-        <p>{{ descriptionFixed }}</p>
-      </v-col>
-    </v-row>
-
+      <div v-for="(screenshot, idx) in screenshots" :key="idx">
+      {{screenshot}}</div>
       
-
-        <!-- <v-btn class="button" rounded="xs" @click="addGame" v-show="added"> 
-          Añadir
-          <span class="material-icons" id="iconCross">close</span>
-        </v-btn>-->
-
+    </v-row>
+    <v-row>
+      <v-col>
+        {{game.description}}
+      </v-col>
+    </v-row>
+        
+    <v-btn class="button" rounded="xs" @click="addGame" v-show="added">
+      Añadir
+      <span class="material-icons" id="iconCross">close</span>
+    </v-btn>
   </v-container>
 </template>
 
@@ -81,17 +88,20 @@ export default {
     return {
       game: {},
       added: true,
+      screenshots: []
     };
   },
   async created() {
     const result = await apiRAWG.getOneGame(this.$route.params.id);
+    const response = await apiRAWG.getGameScreenshots(this.$route.params.id)
     this.game = result;
+    this.screenshots = response
   },
   async updated() {
     const result = await apiRAWG.getOneGame(this.$route.params.id);
     this.game = result;
   },
-  
+
   computed: {
     descriptionFixed() {
       return (this.game.description = this.game.description
@@ -103,16 +113,16 @@ export default {
         .replace(/&quot;/g, '"')
         .replace(/&amp;/g, "&"));
     },
-    methods: {
-      async addGame() {
-        const response = await gamesAPI.addGame(this.game);
-        if (response._id !== undefined) {
-          const res = await usersAPI.addGameToCollection(response._id);
-          this.added = false;
-        } else {
-          this.added = false;
-        }
-      },
+  },
+  methods: {
+    async addGame() {
+      const response = await gamesAPI.addGame(this.game);
+      if (response._id !== undefined) {
+        const res = await usersAPI.addGameToCollection(response._id);
+        this.added = false;
+      } else {
+        this.added = false;
+      }
     },
   },
 };
@@ -128,7 +138,7 @@ export default {
   color: #a1acb4;
   background-color: #3e5161;
 }
-.metalogo{
+.metalogo {
   height: 25px;
 }
 #iconCross {
