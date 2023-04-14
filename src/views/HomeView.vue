@@ -29,7 +29,7 @@
         </p>
       </v-col>
     </v-row>
-    <v-row justify="space-around">
+    <v-row justify="space-around" v-if="!store.token">
       <v-col cols="auto">
         <v-btn class="button" rounded="xs" @click="toLogin">
           Login
@@ -49,11 +49,12 @@
 </template>
 
 <script>
+import { useAuthStore } from '../stores/auth';
 export default {
   name: "App",
 
   data: () => ({
-
+    store: useAuthStore(),
   }),
   methods: {
     toLogin() {

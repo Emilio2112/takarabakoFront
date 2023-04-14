@@ -23,7 +23,7 @@
 
   <v-navigation-drawer color="#3E5161" v-model="drawer" temporary>
     <v-list-item>Menú</v-list-item>
-    <v-divider></v-divider>
+    <v-divider></v-divider> 
     <v-list v-if="!store.token" density="compact" nav>
       <v-list-item @click="!showSearch" :to="{ name: 'login' }">
         Login

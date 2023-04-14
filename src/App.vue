@@ -5,7 +5,7 @@
     <v-main class="main">
       <router-view />
     </v-main>
-    <Footer></Footer>
+    <Footer class="footer"></Footer>
   </v-app>
 </template>
 
@@ -34,5 +34,11 @@ export default {
 }
 .main {
   margin-top: 60px;
+}
+
+.footer {
+    max-height: 120px;
+    font-size: 16px;
+    bottom: 0;              
 }
 </style>

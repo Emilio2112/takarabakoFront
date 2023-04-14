@@ -65,10 +65,7 @@ export default {
 </script>
 
 <style scoped>
-.footer {
-    height: auto;
-    font-size: 16px;
-}
+
 .card{
     animation:3s linear 1s infinite running slidein;
 }
