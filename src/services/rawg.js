@@ -4,7 +4,7 @@ const API = axios.create({
     baseURL: 'https://api.rawg.io/api',
 })
 
-const apiKey = "?key=c6b1f490d3714d018b22b0603ada77ec"
+const apiKey = "?key=68b518456a524e219c0ead6598b1beda"
 
 async function getAllGames() {
     try {
