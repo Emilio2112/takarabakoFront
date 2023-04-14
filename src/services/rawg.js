@@ -33,6 +33,7 @@ async function getOneGame(id) {
     }
 }
 
+
 export default {
     getAllGames,
     getGameByName,

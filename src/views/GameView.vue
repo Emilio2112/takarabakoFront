@@ -17,7 +17,7 @@
     </v-row>
     <v-row>
       <v-col>
-        <a href="game.website" style="text-decoration: none" target="_blank" rel="noopener noreferrer">{{ game.name }} <v-icon icon="mdi-web"></v-icon></a>
+        <a :href="game.website" style="text-decoration: none" target="_blank" rel="noopener noreferrer">{{ game.name }} <v-icon icon="mdi-web"></v-icon></a>
       </v-col>
     </v-row>
     <v-row>
@@ -39,13 +39,16 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col>
-        <a href="game.metacritic_url" style="text-decoration: none" target="_blank" rel="noopener noreferrer"> <v-img src="../public/metascore.jpg"> {{ game.metacritic }} </a>
+      <v-col cols="2" align-self="center">
+        <v-img src="../public/metascore.png" aspect-ratio="1"></v-img>
+        </v-col>
+        <v-col cols="2" align-self="center">
+        <a :href="game.metacritic_url" style="text-decoration: none" target="_blank" rel="noopener noreferrer"><h1>{{ game.metacritic }}</h1></a>
       </v-col>
     </v-row>
     <v-row>
       <v-col>
-        Metacritic Score: {{ game.metacritic_url }}
+        ESRB: {{ game.esrb_rating.name }}
       </v-col>
     </v-row>
     <v-row>
@@ -125,7 +128,9 @@ export default {
   color: #a1acb4;
   background-color: #3e5161;
 }
-
+.metalogo{
+  height: 25px;
+}
 #iconCross {
   color: #9cade2;
 }
