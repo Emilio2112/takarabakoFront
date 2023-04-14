@@ -6,7 +6,7 @@
   <v-container v-else class="input">
     <v-row justify="center">
       <v-col cols="12" sm="12" md="12" lg="8">
-        Acceso a Takarabako
+        Access
         <v-form fast-fail @submit.prevent="userLogin">
           <v-text-field
             v-model="email"

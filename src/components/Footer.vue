@@ -1,7 +1,7 @@
 <template>
   <v-footer class="footer" color="#3E5161">
     <v-row justify="center">
-      <div class="px-4">
+      <div class="px-4 mt-2">
         <a href="https://www.linkedin.com/in/emilio-casado/" style="text-decoration: none" target="_blank" rel="noopener noreferrer">
         <v-btn icon="mdi-linkedin" variant="text" density="comfortable">
             <v-icon color="#A1ACB4"></v-icon>
@@ -9,21 +9,21 @@
     </a>
 
       </div>
-      <div class="px-4">
+      <div class="px-4 mt-2">
         <a href="mailto: piconto12@gmail.com" style="text-decoration: none" target="_blank" rel="noopener noreferrer">
         <v-btn icon="mdi-email" variant="text" density="comfortable">
             <v-icon color="#A1ACB4"></v-icon>
         </v-btn>
     </a>
       </div>
-      <div class="px-4">
+      <div class="px-4 mt-2">
       <a href="https://github.com/Emilio2112" style="text-decoration: none" target="_blank" rel="noopener noreferrer">
         <v-btn icon="mdi-github" variant="text" density="comfortable">
             <v-icon color="#A1ACB4"></v-icon>
         </v-btn>
     </a>
       </div>
-      <div class="px-4">
+      <div class="px-4 mt-2">
         
         <v-btn icon="mdi-pac-man" variant="text" density="comfortable" @click="dialog=true">
             <v-icon color="#FFFF00"></v-icon>

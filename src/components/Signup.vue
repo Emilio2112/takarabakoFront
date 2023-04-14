@@ -5,7 +5,7 @@
   <v-container v-else class="input">
     <v-row justify="center">
       <v-col cols="12" sm="12" md="12" lg="8">
-        Introduce tus datos
+        Signup form
         <v-form fast-fail @submit.prevent>
           <v-text-field
             type="text"
