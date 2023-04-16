@@ -1,5 +1,8 @@
 <template>
-  <v-container>
+  <v-container v-if="loading">
+    <Loader></Loader>
+  </v-container>
+  <v-container v-else>
     <v-row>
       <v-col>
         <v-img :src="game.background_image"></v-img>
@@ -59,21 +62,32 @@
     <v-row>
       <v-col> </v-col>
     </v-row>
-    <v-row>
-      <div v-for="(screenshot, idx) in screenshots" :key="idx">
-      {{screenshot}}</div>
-      
+    <v-row v-if="screenshots">
+      <v-col>
+        <v-carousel>
+          <v-carousel-item v-for="(screenshot, idx) in screenshots" :key="idx">
+            <v-img :src="screenshot.image"></v-img
+          ></v-carousel-item>
+        </v-carousel>
+      </v-col>
     </v-row>
     <v-row>
       <v-col>
-        {{game.description}}
+        {{ descriptionFixed }}
       </v-col>
     </v-row>
-        
-    <v-btn class="button" rounded="xs" @click="addGame" v-show="added">
-      Añadir
-      <span class="material-icons" id="iconCross">close</span>
-    </v-btn>
+    <v-row>
+      <v-col>
+        <v-btn v-if="!store.token" class="button" rounded="xs" @click="goToLogin">
+          Login
+          <span class="material-icons" id="iconCross">close</span>
+        </v-btn>
+        <v-btn v-else class="button" rounded="xs" @click="addGame" v-show="added">
+          Añadir
+          <span class="material-icons" id="iconCross">close</span>
+        </v-btn>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -81,6 +95,9 @@
 import apiRAWG from "../services/rawg";
 import gamesAPI from "../services/games";
 import usersAPI from "../services/users";
+import Loader from "../components/Loader.vue";
+import { useAuthStore } from "../stores/auth";
+
 
 export default {
   name: "GameView",
@@ -88,20 +105,21 @@ export default {
     return {
       game: {},
       added: true,
-      screenshots: []
+      screenshots: {},
+      loading: true,
+      store: useAuthStore()
     };
   },
   async created() {
-    const result = await apiRAWG.getOneGame(this.$route.params.id);
-    const response = await apiRAWG.getGameScreenshots(this.$route.params.id)
-    this.game = result;
-    this.screenshots = response
+    this.game = await apiRAWG.getOneGame(this.$route.params.id);
+    this.screenshots = await apiRAWG.getGameScreenshots(this.$route.params.id);
+    this.loading = false;
   },
   async updated() {
-    const result = await apiRAWG.getOneGame(this.$route.params.id);
-    this.game = result;
+    this.game = await apiRAWG.getOneGame(this.$route.params.id);
+    this.screenshots = await apiRAWG.getGameScreenshots(this.$route.params.id);
+    this.loading = false;
   },
-
   computed: {
     descriptionFixed() {
       return (this.game.description = this.game.description
@@ -124,6 +142,12 @@ export default {
         this.added = false;
       }
     },
+    goToLogin() {
+      this.$router.push({ name: "login" })
+    }
+  },
+  components: {
+    Loader,
   },
 };
 </script>
@@ -132,8 +156,12 @@ export default {
 .button {
   background-color: #3e5161;
   color: #a1acb4;
-  position: static;
+  box-shadow: inset 0 4px 5px 1px #a1acb48d, 0 5px 10px 1px #000;
 }
+
+.button:active {
+      box-shadow: inset 0 5px 6px 5px #000, 0 0 0 0;
+    }
 .chip {
   color: #a1acb4;
   background-color: #3e5161;
