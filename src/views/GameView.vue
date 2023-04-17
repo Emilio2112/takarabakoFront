@@ -63,6 +63,41 @@
       <v-col> </v-col>
     </v-row>
     <v-row v-if="screenshots">
+      <v-col cols="12">
+
+      <v-slide-group
+        class="pa-4"
+        center-active
+        mandatory
+        show-arrows
+      >
+        <v-slide-group-item
+        v-for="(screenshot, idx) in screenshots" :key="idx"
+        v-slot="{ isSelected, toggle }"
+        >
+
+          <v-img :src="screenshot.image" class="ma-4"
+            :width="isSelected ? 300 : 150"
+            @click="toggle">
+            <v-container>
+              <v-row align-content="end">
+                <v-col align-self="end">
+                  <v-btn v-if="isSelected" density="compact" icon="mdi-fullscreen"
+                  :href="screenshot.image" target="_blank"
+          rel="noopener noreferrer">
+                  
+                  </v-btn>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-img>
+
+        </v-slide-group-item>
+      </v-slide-group>
+
+      </v-col>
+    </v-row>
+    <!-- <v-row v-if="screenshots">
       <v-col>
         <v-carousel>
           <v-carousel-item v-for="(screenshot, idx) in screenshots" :key="idx">
@@ -70,7 +105,7 @@
           ></v-carousel-item>
         </v-carousel>
       </v-col>
-    </v-row>
+    </v-row> -->
     <v-row>
       <v-col>
         {{ descriptionFixed }}
@@ -144,7 +179,7 @@ export default {
     },
     goToLogin() {
       this.$router.push({ name: "login" })
-    }
+    },
   },
   components: {
     Loader,
