@@ -1,12 +1,38 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
 body {
   min-height: 100vh;
-  background-color: #A1ACB4;
+  background-color: #a1acb4;
   transition: color 0.5s, background-color 0.5s;
   line-height: 1.6;
-  font-family: 'Exo', sans-serif;
-  font-size: calc(16px + 1vw);
+  font-family: "Exo", sans-serif;
+  font-size: 16px;
   line-height: calc(1.1em + 0.5vw);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@media (min-width: 0px) {
+  body {
+    font-size: 1em;
+  }
+}
+@media (min-width: 400px) {
+  body {
+    font-size: calc(1em + 1vw);
+  }
+}
+
+@media (min-width: 1001px) {
+  body {
+    font-size: 1.75em;
+    line-height: 1.1em;
+  }
 }

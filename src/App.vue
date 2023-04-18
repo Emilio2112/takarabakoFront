@@ -1,11 +1,17 @@
 <template>
   <v-app class="app">
     <NavBar/>
-
     <v-main class="main">
-      <router-view />
-    </v-main>
+      <v-container>
+      <v-row justify="center">
+        <v-col align-self="center" cols="12" xs="12" sm="12" md="12" lg="8" xl="8" xxl="6" >          
+          <router-view />
+        </v-col>
+      </v-row>
+    </v-container>
     <Footer class="footer"></Footer>
+    </v-main>
+
   </v-app>
 </template>
 
@@ -32,6 +38,7 @@ export default {
 .app {
   background-color: #a1acb4;
 }
+
 .main {
   margin-top: 60px;
 }
