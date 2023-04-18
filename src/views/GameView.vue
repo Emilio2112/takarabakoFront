@@ -47,7 +47,7 @@
     </v-row>
     <v-row>
       <v-col cols="2" align-self="center">
-        <v-img src="../public/metascore.png" aspect-ratio="1"></v-img>
+        <v-img src="../metascore.png" aspect-ratio="1"></v-img>
       </v-col>
       <v-col cols="2" align-self="center">
         <a

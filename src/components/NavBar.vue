@@ -5,8 +5,10 @@
       @click="showMenu()"
     ></v-app-bar-nav-icon>
 
-    <v-toolbar-title v-if="!store.token">Takarabako</v-toolbar-title>
-    <v-toolbar-title v-else>{{ store.userName }}</v-toolbar-title>
+    <v-toolbar-title v-if="!store.token">
+      <RouterLink class="link" to="/">Takarabako</RouterLink>
+      </v-toolbar-title>
+    <v-toolbar-title v-else><RouterLink class="link" to="/">{{ store.userName }}´s Takarabako</RouterLink></v-toolbar-title>
 
     <v-spacer></v-spacer>
 
@@ -128,6 +130,13 @@ export default {
   background-color: rgb(179, 174, 174);
   margin-top: 5em;
   margin-left: 85%;
+}
+.link {
+  text-decoration: none;
+}
+.link:visited {
+  text-decoration: none;
+  color: black
 }
 #iconCircle {
   color: #ef6f69;

@@ -6,6 +6,10 @@
   margin: 0;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   min-height: 100vh;
   background-color: #a1acb4;
@@ -17,6 +21,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100%;
 }
 
 @media (min-width: 0px) {

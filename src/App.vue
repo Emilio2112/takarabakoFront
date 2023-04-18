@@ -1,17 +1,25 @@
 <template>
   <v-app class="app">
-    <NavBar/>
+    <NavBar />
     <v-main class="main">
       <v-container>
-      <v-row justify="center">
-        <v-col align-self="center" cols="12" xs="12" sm="12" md="12" lg="8" xl="8" xxl="6" >          
-          <router-view />
-        </v-col>
-      </v-row>
-    </v-container>
-    <Footer class="footer"></Footer>
+        <v-row justify="center">
+          <v-col
+            align-self="center"
+            cols="12"
+            xs="12"
+            sm="12"
+            md="12"
+            lg="8"
+            xl="8"
+            xxl="6"
+          >
+            <router-view />
+          </v-col>
+        </v-row>
+      </v-container>
     </v-main>
-
+    <Footer class="footer"></Footer>
   </v-app>
 </template>
 
@@ -20,17 +28,14 @@ import { RouterLink, RouterView } from "vue-router";
 import NavBar from "../src/components/NavBar.vue";
 import Footer from "./components/Footer.vue";
 
-
-
 export default {
   name: "App",
 
-  data: () => ({
-  }),
+  data: () => ({}),
   components: {
     NavBar,
-    Footer
-  }
+    Footer,
+  },
 };
 </script>
 
@@ -44,8 +49,8 @@ export default {
 }
 
 .footer {
-    max-height: 120px;
-    font-size: 16px;
-    bottom: 0;              
+  max-height: 120px;
+  font-size: 16px;
+  bottom: 0;
 }
 </style>
