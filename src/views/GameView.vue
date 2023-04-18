@@ -15,12 +15,13 @@
     </v-row>
     <v-row>
       <v-col>
-        <h3>{{ game.released }}</h3>
+        <h3 v-if="game.released">{{ game.released }}</h3>
+        <h3 v-else>No released date</h3>
       </v-col>
     </v-row>
-    <v-row>
+    <v-row v-if="game.website">
       <v-col>
-        <a
+        <a 
           :href="game.website"
           style="text-decoration: none"
           target="_blank"
@@ -58,28 +59,25 @@
           ><h1>{{ game.metacritic }}</h1></a
         >
       </v-col>
-      <v-col>
-        {{ game.esrb_rating }}
-      </v-col>
-<v-col cols="3" v-if="!game.esrb_rating">
+      <v-col cols="3" v-if="!game.esrb_rating">
         <v-img src="../Rating_Pending.png" aspect-ratio="1"></v-img>
       </v-col>
-      <v-col cols="3" v-else-if="(game.esrb_rating.id === 1)">
+      <v-col cols="3" v-else-if="game.esrb_rating.id === 1">
         <v-img src="../Everyone.png" aspect-ratio="1"></v-img>
       </v-col>
-      <v-col cols="3" v-else-if="(game.esrb_rating.id === 2)">
+      <v-col cols="3" v-else-if="game.esrb_rating.id === 2">
         <v-img src="../Everyone_10+.png" aspect-ratio="1"></v-img>
       </v-col>
-      <v-col cols="3" v-else-if="(game.esrb_rating.id === 3)">
+      <v-col cols="3" v-else-if="game.esrb_rating.id === 3">
         <v-img src="../Teen.png" aspect-ratio="1"></v-img>
       </v-col>
-      <v-col cols="3" v-else-if="(game.esrb_rating.id === 4)">
+      <v-col cols="3" v-else-if="game.esrb_rating.id === 4">
         <v-img src="../Mature.png" aspect-ratio="1"></v-img>
-      </v-col>  
-      <v-col cols="3" v-else-if="(game.esrb_rating.id === 5)">
+      </v-col>
+      <v-col cols="3" v-else-if="game.esrb_rating.id === 5">
         <v-img src="../Adults_Only_18+.png" aspect-ratio="1"></v-img>
       </v-col>
-      <v-col cols="3" v-else-if="(game.esrb_rating.id === 0)">
+      <v-col cols="3" v-else-if="game.esrb_rating.id === 0">
         <v-img src="../Rating_Pending.png" aspect-ratio="1"></v-img>
       </v-col>
     </v-row>
@@ -212,9 +210,9 @@ export default {
         this.list.push(idGame.id);
       }
       if (this.list.includes(this.game.id)) {
-       return this.added = false;
+        return (this.added = false);
       } else {
-        return this.added = true
+        return (this.added = true);
       }
     },
   },
