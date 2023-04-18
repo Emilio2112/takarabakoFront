@@ -59,27 +59,27 @@
         >
       </v-col>
       <v-col>
-        {{ game.ersb_rating }}
+        {{ game.esrb_rating }}
       </v-col>
-      <v-col cols="3" v-if="!game.esrb_rating">
+<v-col cols="3" v-if="!game.esrb_rating">
         <v-img src="../Rating_Pending.png" aspect-ratio="1"></v-img>
       </v-col>
-      <v-col cols="3" v-else-if="(game.esrb_rating.id = 1)">
+      <v-col cols="3" v-else-if="(game.esrb_rating.id === 1)">
         <v-img src="../Everyone.png" aspect-ratio="1"></v-img>
       </v-col>
-      <v-col cols="3" v-else-if="(game.esrb_rating.id = 2)">
+      <v-col cols="3" v-else-if="(game.esrb_rating.id === 2)">
         <v-img src="../Everyone_10+.png" aspect-ratio="1"></v-img>
       </v-col>
-      <v-col cols="3" v-else-if="(game.esrb_rating.id = 3)">
+      <v-col cols="3" v-else-if="(game.esrb_rating.id === 3)">
         <v-img src="../Teen.png" aspect-ratio="1"></v-img>
       </v-col>
-      <v-col cols="3" v-else-if="(game.esrb_rating.id = 4)">
+      <v-col cols="3" v-else-if="(game.esrb_rating.id === 4)">
         <v-img src="../Mature.png" aspect-ratio="1"></v-img>
-      </v-col>
-      <v-col cols="3" v-else-if="(game.esrb_rating.id = 5)">
+      </v-col>  
+      <v-col cols="3" v-else-if="(game.esrb_rating.id === 5)">
         <v-img src="../Adults_Only_18+.png" aspect-ratio="1"></v-img>
       </v-col>
-      <v-col cols="3" v-else="(game.esrb_rating.id = 5)">
+      <v-col cols="3" v-else-if="(game.esrb_rating.id === 0)">
         <v-img src="../Rating_Pending.png" aspect-ratio="1"></v-img>
       </v-col>
     </v-row>
