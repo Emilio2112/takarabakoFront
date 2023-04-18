@@ -2,7 +2,7 @@
   <v-container>
     <v-row justify="center">
       <v-col cols="10" md="8" xl="8">
-        <v-img src="../public/takaralogo.jpg">
+        <v-img src="../takaralogo.jpg">
           <v-container>
             <v-row class="text-center">
               <v-col>

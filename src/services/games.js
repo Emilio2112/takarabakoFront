@@ -35,9 +35,19 @@ async function getGame(id) {
         return {error: error.message}
     }
 }
+
+async function getAllGames() {
+    try {
+        const response = await API.get('/games')
+        return response.data
+    } catch (error) {
+        return {error: error.message}
+    }
+}
     
 
 export default {
     addGame,
-    getGame
+    getGame,
+    getAllGames
 }
