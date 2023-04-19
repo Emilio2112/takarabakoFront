@@ -100,9 +100,12 @@
           <v-dialog activator="parent" width="auto">
             <v-card color="#76858F" class="pa-4">
               <v-card-text> Game Completed </v-card-text>
+              <v-text-field label="Rating" v-model="finalRating"></v-text-field>
+              <v-text-field label="Time" v-model="finalTime"></v-text-field>
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn
+                  @click="insertStats"
                   class="button"
                   rounded="xs"
                   :to="{ name: 'collectionView' }"
@@ -136,9 +139,11 @@ export default {
     return {
       game: {},
       user: [],
+      finalTime: null,
+      finalRating: null,
       loading: true,
       showButtonPlaying: false,
-      showButtonCompleted: false,
+      showButtonCompleted: false
     };
   },
   async created() {
@@ -159,6 +164,14 @@ export default {
         particleCount: 150,
         spread: 60,
       });
+    },
+    async insertStats() {
+      const res = await gamesAPI.updateGameStats(
+        this.game._id,
+        this.finalTime,
+        this.finalRating
+      );
+      console.log(res);
     },
   },
   computed: {

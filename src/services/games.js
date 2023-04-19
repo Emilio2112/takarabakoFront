@@ -44,10 +44,25 @@ async function getAllGames() {
         return {error: error.message}
     }
 }
-    
+
+async function updateGameStats (id, finalTime, finalRating) {
+    const store = useAuthStore()
+    try {
+        const response = await API.put(`/games/${id}`, {rating: finalRating, time: finalTime} ,{
+            headers: {
+                token: store.token
+            }
+        })
+        console.log("culo", response.data)
+        return response.data
+    } catch (error) {
+        return {error: error.message}
+    }
+}
 
 export default {
     addGame,
     getGame,
-    getAllGames
+    getAllGames,
+    updateGameStats
 }
