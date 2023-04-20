@@ -54,11 +54,11 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-sheet rounded class="pa-6 mx-auto" color="#76858F">
-          <p>
-            {{ descriptionFixed }}
-          </p>
-        </v-sheet>
+        <Scrollbar maxHeight="200px" always>
+          <v-card color="#76858F">
+            <p class="pa-3">{{ descriptionFixed }}</p>
+          </v-card>
+        </Scrollbar>
       </v-col>
     </v-row>
     <v-row justify="space-around">
@@ -99,19 +99,21 @@
           </span>
           <v-dialog activator="parent" width="auto" persistent>
             <v-card color="#76858F" class="pa-4">
-              <v-card-title> <h3 class="text-center">Game Completed!!!</h3> </v-card-title>
+              <v-card-title>
+                <h3 class="text-center">Game Completed!!!</h3>
+              </v-card-title>
               <v-row justify="center">
                 <v-col class="text-center"> Rating: </v-col>
               </v-row>
               <v-row>
                 <v-col>
                   <v-rating
-                v-model="finalRating"
-                color="#FFFF00"
-                hover
-                half-increments
-                size="x-large"
-              ></v-rating>
+                    v-model="finalRating"
+                    color="#FFFF00"
+                    hover
+                    half-increments
+                    size="x-large"
+                  ></v-rating>
                 </v-col>
               </v-row>
               <v-divider class="py-2"></v-divider>
