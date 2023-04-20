@@ -225,6 +225,7 @@ export default {
       } else {
         this.added = false;
       }
+      this.$router.push({ name: "collectionView" });
     },
     goToLogin() {
       this.$router.push({ name: "login" });

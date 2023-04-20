@@ -97,11 +97,55 @@
           >Completed<span class="material-icons" id="iconSquare"
             >check_box_outline_blank
           </span>
-          <v-dialog activator="parent" width="auto">
+          <v-dialog activator="parent" width="auto" persistent>
             <v-card color="#76858F" class="pa-4">
-              <v-card-text> Game Completed </v-card-text>
-              <v-text-field label="Rating" v-model="finalRating"></v-text-field>
-              <v-text-field label="Time" v-model="finalTime"></v-text-field>
+              <v-card-title> <h3 class="text-center">Game Completed!!!</h3> </v-card-title>
+              <v-row justify="center">
+                <v-col class="text-center"> Rating: </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <v-rating
+                v-model="finalRating"
+                color="#FFFF00"
+                hover
+                half-increments
+                size="x-large"
+              ></v-rating>
+                </v-col>
+              </v-row>
+              <v-divider class="py-2"></v-divider>
+              <v-row class="mb-4" justify="space-between">
+                <v-col cols="12" class="text-center"> Time: </v-col>
+                <v-col cols="2" class="pa-1">
+                  <v-btn
+                    size="small"
+                    variant="text"
+                    icon="mdi-minus"
+                    @click="decrement"
+                  ></v-btn>
+                </v-col>
+                <v-col cols="6">
+                  <v-text-field v-model="finalTime"></v-text-field>
+                </v-col>
+                <v-col cols="2" class="pa-1">
+                  <v-btn
+                    size="small"
+                    variant="text"
+                    icon="mdi-plus"
+                    @click="increment"
+                  ></v-btn>
+                </v-col>
+              </v-row>
+              <v-slider
+                v-model="finalTime"
+                track-color="grey"
+                min="0"
+                max="300"
+                :step="1"
+              >
+              </v-slider>
+              <v-divider class="py-2"></v-divider>
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn
@@ -143,7 +187,7 @@ export default {
       finalRating: null,
       loading: true,
       showButtonPlaying: false,
-      showButtonCompleted: false
+      showButtonCompleted: false,
     };
   },
   async created() {
@@ -171,7 +215,12 @@ export default {
         this.finalTime,
         this.finalRating
       );
-      console.log(res);
+    },
+    decrement() {
+      this.finalTime--;
+    },
+    increment() {
+      this.finalTime++;
     },
   },
   computed: {

@@ -53,7 +53,6 @@ async function updateGameStats (id, finalTime, finalRating) {
                 token: store.token
             }
         })
-        console.log("culo", response.data)
         return response.data
     } catch (error) {
         return {error: error.message}
