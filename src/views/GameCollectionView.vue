@@ -31,36 +31,68 @@
     </v-row>
     <v-row>
       <v-col>
-        <h4>Original name: {{ game.name_original }}</h4>
+        <v-card color="#A1ACB4" flat>
+          <v-tabs v-model="tab"  align-tabs="end">
+            <v-tab :value="1">Information</v-tab>
+            <v-tab :value="2">Stats</v-tab>
+            <v-tab :value="3">Screenshots</v-tab>
+          </v-tabs>
+          <v-window v-model="tab">
+            <v-window-item :value="1">
+              <v-container fluid>
+                <v-row>
+                  <v-col>
+                    <h4>Original name: {{ game.name_original }}</h4>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col>
+                    <h2>Released: {{ releasedDate }}</h2>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col>
+                    <v-chip
+                      class="chip ma-1"
+                      variant="elevated"
+                      v-for="(platform, idx) in game.platforms"
+                      :key="idx"
+                      size="x-large"
+                    >
+                      {{ platform.platform.name }}
+                    </v-chip>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col>
+                    <Scrollbar maxHeight="200px" always>
+                      <v-card color="#76858F">
+                        <p class="pa-3">{{ descriptionFixed }}</p>
+                      </v-card>
+                    </Scrollbar>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-window-item>
+            <v-window-item :value="2">
+              <v-container fluid>
+                <v-row>
+                  <v-col cols="12" md="4"> Culo </v-col>
+                </v-row>
+              </v-container>
+            </v-window-item>
+            <v-window-item :value="3">
+              <v-container fluid>
+                <v-row>
+                  <v-col cols="12" md="4"> Culo3 </v-col>
+                </v-row>
+              </v-container>
+            </v-window-item>
+          </v-window>
+        </v-card>
       </v-col>
     </v-row>
-    <v-row>
-      <v-col>
-        <h2>Released: {{ releasedDate }}</h2>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col>
-        <v-chip
-          class="chip ma-1"
-          variant="elevated"
-          v-for="(platform, idx) in game.platforms"
-          :key="idx"
-          size="x-large"
-        >
-          {{ platform.platform.name }}
-        </v-chip>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col>
-        <Scrollbar maxHeight="200px" always>
-          <v-card color="#76858F">
-            <p class="pa-3">{{ descriptionFixed }}</p>
-          </v-card>
-        </Scrollbar>
-      </v-col>
-    </v-row>
+
     <v-row justify="space-around">
       <v-col cols="auto">
         <v-btn
@@ -190,6 +222,7 @@ export default {
       loading: true,
       showButtonPlaying: false,
       showButtonCompleted: false,
+      tab: null
     };
   },
   async created() {

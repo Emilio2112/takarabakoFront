@@ -27,13 +27,13 @@
     <v-list-item>Menú</v-list-item>
     <v-divider></v-divider> 
     <v-list v-if="!store.token" density="compact" nav>
-      <v-list-item @click="!showSearch" :to="{ name: 'login' }">
+      <v-list-item class="pa-3" @click="!showSearch" :to="{ name: 'login' }">
         Login
           <span class="material-icons" id="iconSquare"
             >check_box_outline_blank</span
           >
       </v-list-item>
-      <v-list-item @click="!showSearch" :to="{ name: 'signup' }">
+      <v-list-item class="pa-3" @click="!showSearch" :to="{ name: 'signup' }">
           Signup
           <span class="material-icons" id="iconTriangle">change_history</span>
 </v-list-item
