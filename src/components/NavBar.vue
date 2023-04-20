@@ -7,8 +7,12 @@
 
     <v-toolbar-title v-if="!store.token">
       <RouterLink class="link" to="/">Takarabako</RouterLink>
-      </v-toolbar-title>
-    <v-toolbar-title v-else><RouterLink class="link" to="/">{{ store.userName }}´s Takarabako</RouterLink></v-toolbar-title>
+    </v-toolbar-title>
+    <v-toolbar-title v-else
+      ><RouterLink class="link" to="/"
+        >{{ store.userName }}´s Takarabako</RouterLink
+      ></v-toolbar-title
+    >
 
     <v-spacer></v-spacer>
 
@@ -22,52 +26,56 @@
   <v-dialog class="dialog" v-model="showSearch" scrollable>
     <SearchBar></SearchBar>
   </v-dialog>
-
   <v-navigation-drawer color="#3E5161" v-model="drawer" temporary>
-    <v-list-item>Menú</v-list-item>
-    <v-divider></v-divider> 
+    <v-list-item>Menu</v-list-item>
+    <v-divider></v-divider>
     <v-list v-if="!store.token" density="compact" nav>
-      <v-list-item class="pa-3" @click="!showSearch" :to="{ name: 'login' }">
-        Login
+      <v-list-item @click="!showSearch" :to="{ name: 'login' }">
+        <p class="pa-2">
+          Login
           <span class="material-icons" id="iconSquare"
             >check_box_outline_blank</span
           >
+        </p>
       </v-list-item>
-      <v-list-item class="pa-3" @click="!showSearch" :to="{ name: 'signup' }">
+      <v-list-item @click="!showSearch" :to="{ name: 'signup' }">
+        <p class="pa-2">
           Signup
           <span class="material-icons" id="iconTriangle">change_history</span>
-</v-list-item
-      >
+        </p>
+      </v-list-item>
     </v-list>
     <v-list v-else density="compact" nav>
-      <v-list-item
-        style="text-decoration: none"
-        :to="{ name: 'collectionView' }"
-      >
-        Colección
-        <span class="material-icons" id="iconSquare"
-          >check_box_outline_blank</span
-        >
+      <v-list-item :to="{ name: 'collectionView' }">
+        <p class="pa-2">
+          Collection
+          <span class="material-icons" id="iconSquare"
+            >check_box_outline_blank</span
+          >
+        </p>
       </v-list-item>
 
       <v-list-item :to="{ name: 'playingView' }">
-        Jugando
-        <span class="material-icons" id="iconTriangle">change_history</span>
+        <p class="pa-2">
+          Backlog
+          <span class="material-icons" id="iconTriangle">change_history</span>
+        </p>
       </v-list-item>
 
-      <v-list-item
-        
-        :to="{ name: 'completedView' }"
-      >
-        Finalizados
-        <span class="material-icons" id="iconCross">close</span>
+      <v-list-item :to="{ name: 'completedView' }">
+        <p class="pa-2">
+          Completed
+          <span class="material-icons" id="iconCross">close</span>
+        </p>
       </v-list-item>
 
       <v-list-item @click="logout" style="text-decoration: none">
-        Logout
-        <span class="material-icons" id="iconCircle"
-          >radio_button_unchecked</span
-        >
+        <p class="pa-2">
+          Logout
+          <span class="material-icons" id="iconCircle"
+            >radio_button_unchecked</span
+          >
+        </p>
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
@@ -136,7 +144,7 @@ export default {
 }
 .link:visited {
   text-decoration: none;
-  color: black
+  color: black;
 }
 #iconCircle {
   color: #ef6f69;

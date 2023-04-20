@@ -32,7 +32,7 @@
     <v-row>
       <v-col>
         <v-card color="#A1ACB4" flat>
-          <v-tabs v-model="tab"  align-tabs="end">
+          <v-tabs v-model="tab" align-tabs="end">
             <v-tab :value="1">Information</v-tab>
             <v-tab :value="2">Stats</v-tab>
             <v-tab :value="3">Screenshots</v-tab>
@@ -42,13 +42,23 @@
               <v-container fluid>
                 <v-row>
                   <v-col>
-                    <h4>Original name: {{ game.name_original }}</h4>
+                    <h3 v-if="game.released">{{ releasedDate }}</h3>
+                    <h3 v-else>No released date</h3>
+                  </v-col>
+                </v-row>
+                <v-row v-if="game.website">
+                  <v-col>
+                    <a
+                      :href="game.website"
+                      style="text-decoration: none"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >{{ game.name }} <v-icon icon="mdi-web-cancel"></v-icon
+                    ></a>
                   </v-col>
                 </v-row>
                 <v-row>
-                  <v-col>
-                    <h2>Released: {{ releasedDate }}</h2>
-                  </v-col>
+                  <v-col> Original name: {{ game.name_original }} </v-col>
                 </v-row>
                 <v-row>
                   <v-col>
@@ -61,6 +71,44 @@
                     >
                       {{ platform.platform.name }}
                     </v-chip>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="2" align-self="center">
+                    <v-img src="../metascore.png" aspect-ratio="1"></v-img>
+                  </v-col>
+                  <v-col cols="2" align-self="center">
+                    <a
+                      :href="game.metacritic_url"
+                      style="text-decoration: none"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      ><h1>{{ game.metacritic }}</h1></a
+                    >
+                  </v-col>
+                  <v-col cols="3" v-if="!game.esrb_rating">
+                    <v-img src="../Rating_Pending.png" aspect-ratio="1"></v-img>
+                  </v-col>
+                  <v-col cols="3" v-else-if="game.esrb_rating.id === 1">
+                    <v-img src="../Everyone.png" aspect-ratio="1"></v-img>
+                  </v-col>
+                  <v-col cols="3" v-else-if="game.esrb_rating.id === 2">
+                    <v-img src="../Everyone_10+.png" aspect-ratio="1"></v-img>
+                  </v-col>
+                  <v-col cols="3" v-else-if="game.esrb_rating.id === 3">
+                    <v-img src="../Teen.png" aspect-ratio="1"></v-img>
+                  </v-col>
+                  <v-col cols="3" v-else-if="game.esrb_rating.id === 4">
+                    <v-img src="../Mature.png" aspect-ratio="1"></v-img>
+                  </v-col>
+                  <v-col cols="3" v-else-if="game.esrb_rating.id === 5">
+                    <v-img
+                      src="../Adults_Only_18+.png"
+                      aspect-ratio="1"
+                    ></v-img>
+                  </v-col>
+                  <v-col cols="3" v-else-if="game.esrb_rating.id === 0">
+                    <v-img src="../Rating_Pending.png" aspect-ratio="1"></v-img>
                   </v-col>
                 </v-row>
                 <v-row>
@@ -77,7 +125,10 @@
             <v-window-item :value="2">
               <v-container fluid>
                 <v-row>
-                  <v-col cols="12" md="4"> Culo </v-col>
+                  <v-col cols="12" md="4"> {{timesCompleted}} players has completed </v-col>
+                  <v-col>
+                    Hours Average {{ mediaTimes }}
+                  </v-col>
                 </v-row>
               </v-container>
             </v-window-item>
@@ -201,6 +252,7 @@
         <ButtonBack></ButtonBack>
       </v-col>
     </v-row>
+    {{ usersHasCompletedMe }}
   </v-container>
 </template>
 
@@ -211,6 +263,7 @@ import usersAPI from "../services/users";
 import gamesAPI from "../services/games";
 import Loader from "../components/Loader.vue";
 import confetti from "https://esm.run/canvas-confetti@1";
+import { all } from "axios";
 
 export default {
   data() {
@@ -222,12 +275,14 @@ export default {
       loading: true,
       showButtonPlaying: false,
       showButtonCompleted: false,
-      tab: null
+      tab: null,
+      usersList: []
     };
   },
   async created() {
     this.game = await gamesAPI.getGame(this.$route.params.id);
     this.user = await authAPI.getUser();
+    this.usersList = await usersAPI.getAllUsers()
     this.loading = false;
   },
   methods: {
@@ -306,6 +361,28 @@ export default {
         return (this.game.rating = res.toFixed(1));
       }
     },
+    timesCompleted () {
+      return this.game.time.length
+    },
+    mediaTimes() {
+      return this.game.time.reduce((prev, curr) => curr += prev)/this.game.time.length
+    },
+    usersHasCompletedMe() {
+      let result = 0
+      let allGamesOfUsers = []
+      for(let e of this.usersList) {
+        if(e.completed.length !== 0) {
+          allGamesOfUsers.push(...e.games)}
+      }
+
+      allGamesOfUsers
+      for(let i = 0; i<allGamesOfUsers.length; i++) {
+        if(this.game._id.toString() === allGamesOfUsers[i]) {
+          result+=1
+        }
+      }
+      return result
+    }
   },
   components: {
     ButtonBack,

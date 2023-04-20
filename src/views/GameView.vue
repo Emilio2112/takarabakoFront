@@ -21,7 +21,7 @@
     </v-row>
     <v-row v-if="game.website">
       <v-col>
-        <a 
+        <a
           :href="game.website"
           style="text-decoration: none"
           target="_blank"
@@ -219,13 +219,9 @@ export default {
   methods: {
     async addGame() {
       const response = await gamesAPI.addGame(this.game);
-      if (response._id !== undefined) {
-        const res = await usersAPI.addGameToCollection(response._id);
-        this.added = false;
-      } else {
-        this.added = false;
-      }
-      this.$router.push({ name: "collectionView" });
+      console.log(response)
+      await usersAPI.addGameToCollection(response._id)
+      this.added = false;
     },
     goToLogin() {
       this.$router.push({ name: "login" });

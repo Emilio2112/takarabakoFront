@@ -94,11 +94,26 @@ async function viewCompleted() {
     }
 }
 
+async function getAllUsers() {
+    const store = useAuthStore()
+    try {
+        const response = await API.get('users/', {
+            headers: {
+                token: store.token
+            }
+        })
+        return response.data
+    } catch (error) {
+        return error
+    }
+}
+
 export default {
     addGameToCollection,
     viewCollection,
     viewPlaying,
     viewCompleted,
     addGameToPlaying,
-    addGameToCompleted
+    addGameToCompleted,
+    getAllUsers
 }

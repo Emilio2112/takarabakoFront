@@ -1,8 +1,8 @@
 <template>
   <v-container>
-    <v-row justify="space-between">
-      <v-col cols="3" xs="3" md="6" lg="6">{{ games.length }} Games</v-col>
-      <v-col cols="9" xs="9" md="3" lg="3">
+    <v-row class="pa-2" justify="space-between">
+      <v-col cols="3" xs="3" md="6" lg="4">{{ games.length }} Games</v-col>
+      <v-col cols="9" xs="9" md="3" lg="5">
         <div class="d-flex flex-column align-end">
           <v-btn-toggle elevation="4" mandatory>
             <v-btn
@@ -53,7 +53,10 @@
         </div>
       </v-col>
     </v-row>
-    <v-row v-if="cardView">
+    <v-divider class="py-2"></v-divider>
+    <Scrollbar class="pa-2" height="50vw" always>
+      <v-container>
+    <v-row class="pa-2" v-if="cardView">
       <v-col
         v-for="(game, idx) in filteredGames"
         :key="idx"
@@ -108,6 +111,9 @@
         </v-card>
       </v-col>
     </v-row>
+  </v-container>
+  </Scrollbar>
+  <v-divider class="pa-2 ma-2"></v-divider>
   </v-container>
 </template>
 
