@@ -124,10 +124,70 @@
             </v-window-item>
             <v-window-item :value="2">
               <v-container fluid>
-                <v-row>
-                  <v-col cols="12" md="4"> {{timesCompleted}} players has completed </v-col>
+                <v-row v-if="timesCompleted !== 0">
+                  <v-col cols="12" md="4">
+                    {{ timesCompleted }}% has completed {{ this.game.name }}
+                  </v-col>
+                  <v-col> Hours Average {{ mediaTimes }} </v-col>
+                </v-row>
+                <v-row v-else>
+                  <v-col> No stats for this game </v-col>
+                </v-row>
+                <v-row v-if="ratingMedia > 0">
                   <v-col>
-                    Hours Average {{ mediaTimes }}
+                    <v-card
+                      class="d-flex flex-column mx-auto py-8"
+                      elevation="10"
+                      height="500"
+                      width="360"
+                    >
+                      <div class="d-flex justify-center mt-auto text-h5">
+                        Rating overview
+                      </div>
+
+                      <div class="d-flex align-center flex-column my-auto">
+                        <div class="text-h2 mt-5">
+                          {{ ratingMedia }}
+                          <span class="text-h6 ml-n3">/5</span>
+                        </div>
+
+                        <v-rating
+                          :model-value="ratingMedia"
+                          color="yellow-darken-3"
+                          half-increments
+                        ></v-rating>
+                        <div class="px-3">{{ game.rating.length }} ratings</div>
+                      </div>
+
+                      <v-list
+                        bg-color="transparent"
+                        class="d-flex flex-column-reverse"
+                        density="compact"
+                      >
+                        <v-list-item v-for="(rating, i) in ratingValues" :key="i">
+                          <v-progress-linear
+                            :model-value="rating"
+                            class="mx-n5"
+                            color="yellow-darken-3"
+                            height="20"
+                            rounded
+                          ></v-progress-linear>
+
+                          <template v-slot:prepend>
+                            <span>{{ i }}</span>
+                            <v-icon icon="mdi-star" class="mx-3"></v-icon>
+                          </template>
+
+                          <template v-slot:append>
+                            <div class="rating-values">
+                              <span class="d-flex justify-end">
+                                {{ rating }}
+                              </span>
+                            </div>
+                          </template>
+                        </v-list-item>
+                      </v-list>
+                    </v-card>
                   </v-col>
                 </v-row>
               </v-container>
@@ -276,13 +336,14 @@ export default {
       showButtonPlaying: false,
       showButtonCompleted: false,
       tab: null,
-      usersList: []
+      usersList: [],
+      values: {}
     };
   },
   async created() {
     this.game = await gamesAPI.getGame(this.$route.params.id);
     this.user = await authAPI.getUser();
-    this.usersList = await usersAPI.getAllUsers()
+    this.usersList = await usersAPI.getAllUsers();
     this.loading = false;
   },
   methods: {
@@ -356,33 +417,40 @@ export default {
         this.game.rating.reduce((acc, cur) => acc + cur) /
         this.game.rating.length;
       if (res % 1 === 0) {
-        return (this.game.rating = res);
+        return res
       } else {
-        return (this.game.rating = res.toFixed(1));
+        return res.toFixed(1);
       }
     },
-    timesCompleted () {
-      return this.game.time.length
+    ratingValues() {
+      const sortedValues = this.game.rating.sort((a,b) => b-a)
+      return sortedValues.reduce((prev, cur) => ((prev[cur] = prev[cur] + 1 || 1), prev), {})
+    },
+    timesCompleted() {
+      return (this.game.time.length / this.usersList.length) * 100;
     },
     mediaTimes() {
-      return this.game.time.reduce((prev, curr) => curr += prev)/this.game.time.length
+      return (
+        this.game.time.reduce((prev, curr) => (curr += prev)) /
+        this.game.time.length
+      );
     },
     usersHasCompletedMe() {
-      let result = 0
-      let allGamesOfUsers = []
-      for(let e of this.usersList) {
-        if(e.completed.length !== 0) {
-          allGamesOfUsers.push(...e.games)}
-      }
-
-      allGamesOfUsers
-      for(let i = 0; i<allGamesOfUsers.length; i++) {
-        if(this.game._id.toString() === allGamesOfUsers[i]) {
-          result+=1
+      let result = 0;
+      let allGamesOfUsers = [];
+      for (let e of this.usersList) {
+        if (e.completed.length !== 0) {
+          allGamesOfUsers.push(...e.games);
         }
       }
-      return result
-    }
+      allGamesOfUsers;
+      for (let i = 0; i < allGamesOfUsers.length; i++) {
+        if (this.game._id.toString() === allGamesOfUsers[i]) {
+          result += 1;
+        }
+      }
+      return result;
+    },
   },
   components: {
     ButtonBack,

@@ -152,6 +152,23 @@
         >
           Añadir
           <span class="material-icons" id="iconCross">close</span>
+          <v-dialog activator="parent" width="auto">
+            <v-card color="#76858F" class="pa-4">
+              <v-card-text> Game added to your collection </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                  class="button"
+                  rounded="xs"
+                  :to="{ name: 'collectionView' }"
+                  >Close<span class="material-icons" id="iconTriangle"
+                    >change_history
+                  </span>
+                </v-btn>
+                <v-spacer></v-spacer>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </v-btn>
       </v-col>
     </v-row>
@@ -217,16 +234,18 @@ export default {
     },
   },
   methods: {
-    async addGame() { 
-      let list = []
+    async addGame() {
+      let list = [];
       const response = await gamesAPI.addGame(this.game);
       if (response.index === 0) {
-        const gameList = await gamesAPI.getAllGames()
-        for(let gamesId of gameList) {
-          list.push(gamesId.id)
+        const gameList = await gamesAPI.getAllGames();
+        for (let gamesId of gameList) {
+          list.push(gamesId.id);
         }
-        const idx = list.indexOf(this.game.id)
-        await usersAPI.addGameToCollection(gameList[idx])
+        const idx = list.indexOf(this.game.id);
+        await usersAPI.addGameToCollection(gameList[idx]);
+      } else {
+        await usersAPI.addGameToCollection(response._id);
       }
       this.added = false;
     },
@@ -254,10 +273,10 @@ export default {
   color: #a1acb4;
   background-color: #3e5161;
 }
-.metalogo {
-  height: 25px;
-}
 #iconCross {
   color: #9cade2;
 }
+#iconTriangle {
+      color: #38DEC6
+  }
 </style>
