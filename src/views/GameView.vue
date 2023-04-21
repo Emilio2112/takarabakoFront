@@ -217,10 +217,17 @@ export default {
     },
   },
   methods: {
-    async addGame() {
+    async addGame() { 
+      let list = []
       const response = await gamesAPI.addGame(this.game);
-      console.log(response)
-      await usersAPI.addGameToCollection(response._id)
+      if (response.index === 0) {
+        const gameList = await gamesAPI.getAllGames()
+        for(let gamesId of gameList) {
+          list.push(gamesId.id)
+        }
+        const idx = list.indexOf(this.game.id)
+        await usersAPI.addGameToCollection(gameList[idx])
+      }
       this.added = false;
     },
     goToLogin() {
