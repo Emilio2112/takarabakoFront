@@ -16,10 +16,8 @@ async function addGame(newGame) {
                 token: store.token
             }
         })
-        console.log(response.data)
         return response.data
     } catch (error) {
-        console.log("caca")
         return {error: error.message}
     }
 }
