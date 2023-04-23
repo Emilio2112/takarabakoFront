@@ -236,7 +236,9 @@
             <v-window-item :value="3">
               <v-container fluid>
                 <v-row>
-                  <v-col cols="12" md="4"> Culo3 </v-col>
+                  <v-col cols="12" md="4"> 
+                    <screenshotsViewer :game="game"></screenshotsViewer>  
+                  </v-col>
                 </v-row>
               </v-container>
             </v-window-item>
@@ -363,6 +365,7 @@ import usersAPI from "../services/users";
 import gamesAPI from "../services/games";
 import Loader from "../components/Loader.vue";
 import confetti from "https://esm.run/canvas-confetti@1";
+import screenshotsViewer from "../components/screenshotsViewer.vue"
 import { all } from "axios";
 
 export default {
@@ -501,6 +504,7 @@ export default {
   components: {
     ButtonBack,
     Loader,
+    screenshotsViewer
   },
 };
 </script>
