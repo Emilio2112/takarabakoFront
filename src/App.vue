@@ -10,9 +10,9 @@
             xs="12"
             sm="12"
             md="12"
-            lg="8"
-            xl="8"
-            xxl="6"
+            lg="10"
+            xl="10"
+            xxl="8"
           >
             <router-view />
           </v-col>

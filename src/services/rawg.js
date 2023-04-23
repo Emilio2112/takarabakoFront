@@ -1,3 +1,4 @@
+import { asyncComputed } from "@vueuse/core";
 import axios from "axios";
 
 const API = axios.create({
@@ -42,9 +43,31 @@ async function getGameScreenshots(id) {
     }
 }
 
+async function getGameCreators(id) {
+    try {
+        const response = await API.get(`/games/${id}/development-team${apiKey}`)
+        return response.data.results
+    } catch (error) {
+        return {error: error.message} 
+        
+    }
+}
+
+async function getGameSeries(id) {
+    try {
+        const response = await API.get(`/games/${id}/game-series${apiKey}`)
+        return response.data.results
+    } catch (error) {
+        return {error: error.message} 
+        
+    }
+}
+
 export default {
     getAllGames,
     getGameByName,
     getOneGame,
-    getGameScreenshots
+    getGameScreenshots,
+    getGameCreators,
+    getGameSeries
 }

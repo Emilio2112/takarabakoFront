@@ -2,7 +2,7 @@
   <v-container>
     <v-row class="pa-2" justify="space-between">
       <v-col cols="3" xs="3" md="6" lg="4">{{ games.length }} Games</v-col>
-      <v-col cols="9" xs="9" md="3" lg="5">
+      <v-col cols="9" xs="9" md="4" lg="5">
         <div class="d-flex flex-column align-end">
           <v-btn-toggle elevation="4" mandatory>
             <v-btn
@@ -32,7 +32,7 @@
           </v-btn-toggle>
         </div>
       </v-col>
-      <v-col cols="12" xs="12" md="3" lg="3">
+      <v-col cols="12" xs="12" md="2" lg="3">
         <div class="d-flex flex-column align-end">
           <v-btn-toggle elevation="4" mandatory>
             <v-btn

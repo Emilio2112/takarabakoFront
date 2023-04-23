@@ -1,19 +1,17 @@
 <template>
-  <v-container fluid>
+  <Loader v-if="loading"></Loader>
+  <v-container class="container" v-else fluid>
     <v-row v-if="timesCompleted !== 0">
-      <v-col cols="10" xs="10" sm="8" md="6" lg="6" xl="4">
-        {{ timesCompleted }}% has completed {{ this.game.name }}
-      </v-col>
-      <v-col cols="10" xs="10" sm="8" md="6" lg="6" xl="4">
-        Hours Average {{ mediaTimes }}
+      <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12">
+        {{ timesCompleted }}% of the players has completed {{ this.game.name }}
       </v-col>
     </v-row>
     <v-row v-else>
       <v-col> No stats for this game </v-col>
     </v-row>
     <v-row justify="center" v-if="game.time.length > 0">
-      <v-col cols="10" xs="10" sm="8" md="6" lg="6" xl="4">
-        <v-card class="d-flex flex-column mx-auto py-8">
+      <v-col cols="10" xs="10" sm="8" md="6" lg="6" xl="4" >
+        <v-card class="d-flex flex-column mx-auto py-8 elevation-4" color="#3E5161" >
           <div class="d-flex justify-center mt-auto"><h3>Time Average</h3> </div>
 
           <div class="d-flex align-center flex-column my-auto">
@@ -36,7 +34,7 @@
               ></v-progress-linear>
 
               <template v-slot:prepend>
-                <span>{{ i }}</span>
+                <span class="mx-2">{{ i }}</span>
               </template>
 
               <template v-slot:append>
@@ -48,8 +46,8 @@
           </v-list>
         </v-card>
       </v-col>
-      <v-col cols="12" xs="10" sm="8" md="6" lg="6" xl="4">
-        <v-card class="d-flex flex-column mx-auto py-8">
+      <v-col cols="10" xs="10" sm="8" md="6" lg="6" xl="4">
+        <v-card class="d-flex flex-column mx-auto py-8 elevation-4" color="#3E5161">
           <div class="d-flex justify-center mt-auto">
             <h3>Rating overview</h3>
           </div>
@@ -84,7 +82,7 @@
 
               <template v-slot:prepend>
                 <span>{{ i }}</span>
-                <v-icon icon="mdi-star" class="mx-3"></v-icon>
+                <v-icon icon="mdi-star" class="mx-2"></v-icon>
               </template>
 
               <template v-slot:append>
@@ -102,11 +100,13 @@
 
 <script>
 import usersAPI from "../services/users";
+import Loader from "./Loader.vue";
 
 export default {
   data() {
     return {
-    usersList: []
+    usersList: [],
+    loading: true
     };
   },
   props: {
@@ -114,6 +114,7 @@ export default {
   },
   async created() {
     this.usersList = await usersAPI.getAllUsers();
+    this.loading = false
   },
   computed: {
     ratingMedia() {
@@ -136,7 +137,7 @@ export default {
       );
     },
     timesCompleted() {
-      return (this.game.time.length / this.usersList.length) * 100;
+      return ((this.game.time.length / this.usersList.length) * 100).toFixed(2);
     },
     mediaTimes() {
       return (
@@ -169,7 +170,17 @@ export default {
       return result;
     },
   },
+  components: {
+    Loader
+  }
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.container {
+  background-color: #76858F;
+}
+.rating-values {
+  width: 25px;
+}
+</style>

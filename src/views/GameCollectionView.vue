@@ -2,23 +2,10 @@
   <v-container v-if="loading">
     <Loader></Loader>
   </v-container>
-  <v-container v-else>
+  <v-container  v-else>
     <v-row justify="end">
       <v-col>
         <v-img :src="game.background_image">
-          <v-container v-if="game.rates > 0">
-            <v-row justify="end">
-              <v-card color="#9e9e9e70">
-                <v-card-title> Rating </v-card-title>
-                <v-card-text>
-                  <h1 class="rating font-weight-black text-center">
-                    {{ ratingMedia }}
-                  </h1>
-                  <h3 class="rating">/5</h3>
-                </v-card-text>
-              </v-card>
-            </v-row>
-          </v-container>
         </v-img>
       </v-col>
     </v-row>
@@ -32,10 +19,11 @@
     <v-row>
       <v-col>
         <v-card color="#A1ACB4" flat>
-          <v-tabs v-model="tab" align-tabs="end">
+          <v-tabs v-model="tab" align-tabs="end" bg-color="#76858F" grow>
             <v-tab :value="1">Information</v-tab>
             <v-tab :value="2">Stats</v-tab>
             <v-tab :value="3">Screenshots</v-tab>
+            <v-tab :value="4">Creators</v-tab>
           </v-tabs>
           <v-window v-model="tab">
             <v-window-item :value="1">
@@ -46,6 +34,9 @@
             </v-window-item>
             <v-window-item :value="3">
               <ScreenshotsViewer :game="game"></ScreenshotsViewer>
+            </v-window-item>
+            <v-window-item :value="4">
+              <Creators :game="game"></Creators>
             </v-window-item>
           </v-window>
         </v-card>
@@ -173,6 +164,7 @@ import confetti from "https://esm.run/canvas-confetti@1";
 import ScreenshotsViewer from "../components/ScreenshotsViewer.vue";
 import Stats from "../components/Stats.vue";
 import GameData from "../components/GameData.vue";
+import Creators from "../components/Creators.vue";
 import { all } from "axios";
 
 export default {
@@ -256,6 +248,7 @@ export default {
     ScreenshotsViewer,
     Stats,
     GameData,
+    Creators
   },
 };
 </script>
@@ -264,14 +257,7 @@ export default {
 .rating {
   display: inline;
 }
-.chip {
-  color: #a1acb4;
-  background-color: #3e5161;
-}
 
-.rating-values {
-  width: 25px;
-}
 
 .button {
   background-color: #3e5161;

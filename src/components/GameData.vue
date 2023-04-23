@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <v-container fluid>
+    <v-container fluid class="container">
       <v-row>
         <v-col>
           <h3 v-if="game.released">{{ releasedDate }}</h3>
@@ -14,7 +13,7 @@
             style="text-decoration: none"
             target="_blank"
             rel="noopener noreferrer"
-            >{{ game.name }} <v-icon icon="mdi-web-cancel"></v-icon
+            >{{ game.name }} <v-icon icon="mdi-web"></v-icon
           ></a>
         </v-col>
       </v-row>
@@ -34,11 +33,12 @@
           </v-chip>
         </v-col>
       </v-row>
+
       <v-row>
-        <v-col cols="2" align-self="center">
+        <v-col cols="3" xl="1" xxl="1" align-self="center">
           <v-img src="../metascore.png" aspect-ratio="1"></v-img>
         </v-col>
-        <v-col cols="2" align-self="center">
+        <v-col cols="3" align-self="center">
           <a
             :href="game.metacritic_url"
             style="text-decoration: none"
@@ -47,6 +47,7 @@
             ><h1>{{ game.metacritic }}</h1></a
           >
         </v-col>
+        <v-spacer></v-spacer>
         <v-col cols="3" v-if="!game.esrb_rating">
           <v-img src="../Rating_Pending.png" aspect-ratio="1"></v-img>
         </v-col>
@@ -72,20 +73,23 @@
       <v-row>
         <v-col>
           <Scrollbar maxHeight="200px" always>
-            <v-card color="#76858F">
+            <v-card color="#A1ACB4">
               <p class="pa-3">{{ descriptionFixed }}</p>
             </v-card>
           </Scrollbar>
         </v-col>
       </v-row>
     </v-container>
-  </div>
 </template>
 
 <script>
+import apiRAWG from "../services/rawg";
+import Loader from "./Loader.vue";
+
 export default {
   data() {
-    return {};
+    return {
+    };
   },
   props: {
     game: Object,
@@ -105,7 +109,17 @@ export default {
       return (this.game.released = this.game.released.slice(0, 10));
     },
   },
+  components: {
+    Loader,
+  },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.container {
+  background-color: #76858F;
+}
+.chip{
+  color: #A1ACB4;
+  background-color: #3E5161
+}</style>

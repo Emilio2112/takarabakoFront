@@ -1,9 +1,9 @@
 <template>
-  <v-container fluid>
+  <Loader v-if="loading"></Loader>
+  <v-container v-else class="container" fluid>
     <v-row>
-      <v-col cols="12" md="4">
-        <Loader v-if="loading"></Loader>
-        <v-slide-group v-else class="pa-4" center-active mandatory show-arrows>
+      <v-col cols="12">
+        <v-slide-group center-active mandatory show-arrows>
           <v-slide-group-item
             v-for="(screenshot, idx) in screenshots"
             :key="idx"
@@ -73,4 +73,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.container {
+  background-color: #76858F;
+}
+</style>
