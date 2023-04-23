@@ -6,7 +6,7 @@
     <v-row justify="end">
       <v-col>
         <v-img :src="game.background_image">
-          <v-container>
+          <v-container v-if="game.rates > 0">
             <v-row justify="end">
               <v-card color="#9e9e9e70">
                 <v-card-title> Rating </v-card-title>
@@ -125,21 +125,62 @@
             <v-window-item :value="2">
               <v-container fluid>
                 <v-row v-if="timesCompleted !== 0">
-                  <v-col cols="12" md="4">
+                  <v-col cols="10" xs="10" sm="8" md="6" lg="6" xl="4">
                     {{ timesCompleted }}% has completed {{ this.game.name }}
                   </v-col>
-                  <v-col> Hours Average {{ mediaTimes }} </v-col>
+                  <v-col cols="10" xs="10" sm="8" md="6" lg="6" xl="4"> Hours Average {{ mediaTimes }} </v-col>
                 </v-row>
                 <v-row v-else>
                   <v-col> No stats for this game </v-col>
                 </v-row>
-                <v-row v-if="ratingMedia > 0">
-                  <v-col>
+                <v-row justify="center" v-if="game.time.length > 0">
+                  <v-col cols="10" xs="10" sm="8" md="6" lg="6" xl="4">
                     <v-card
                       class="d-flex flex-column mx-auto py-8"
-                      elevation="10"
-                      height="500"
-                      width="360"
+                    >
+                      <div class="d-flex justify-center mt-auto text-h5">
+                        Time Average
+                      </div>
+
+                      <div class="d-flex align-center flex-column my-auto">
+                        <div class="text-h2 mt-5">
+                          {{ mediaTimes }} hours
+                        </div>
+                        <div class="px-3">{{ game.time.length }} players</div>
+                      </div>
+
+                      <v-list
+                        bg-color="transparent"
+                        class="d-flex flex-column-reverse"
+                        density="compact"
+                      >
+                        <v-list-item v-for="(times, i) in timeValues" :key="i">
+                          <v-progress-linear
+                            :model-value="times"
+                            class="mx-n5"
+                            color="yellow-darken-3"
+                            height="20"
+                            rounded
+                          ></v-progress-linear>
+
+                          <template v-slot:prepend>
+                            <span>{{ i }}</span>
+                            <v-icon icon="mdi-star" class="mx-3"></v-icon>
+                          </template>
+
+                          <template v-slot:append>
+                            <div class="rating-values">
+                              <span class="d-flex justify-end"> {{ times }}
+                              </span>
+                            </div>
+                          </template>
+                        </v-list-item>
+                      </v-list>
+                    </v-card>
+                  </v-col>
+                  <v-col cols="12" xs="10" sm="8" md="6" lg="6" xl="4">
+                    <v-card
+                      class="d-flex flex-column mx-auto py-8"
                     >
                       <div class="d-flex justify-center mt-auto text-h5">
                         Rating overview
@@ -155,8 +196,9 @@
                           :model-value="ratingMedia"
                           color="yellow-darken-3"
                           half-increments
+                          disabled
                         ></v-rating>
-                        <div class="px-3">{{ game.rating.length }} ratings</div>
+                        <div class="px-3">{{ game.rates.length }} ratings</div>
                       </div>
 
                       <v-list
@@ -166,7 +208,7 @@
                       >
                         <v-list-item v-for="(rating, i) in ratingValues" :key="i">
                           <v-progress-linear
-                            :model-value="rating"
+                            :model-value="(rating/5)*100"
                             class="mx-n5"
                             color="yellow-darken-3"
                             height="20"
@@ -180,8 +222,7 @@
 
                           <template v-slot:append>
                             <div class="rating-values">
-                              <span class="d-flex justify-end">
-                                {{ rating }}
+                              <span class="d-flex justify-end"> {{ rating }}
                               </span>
                             </div>
                           </template>
@@ -312,7 +353,6 @@
         <ButtonBack></ButtonBack>
       </v-col>
     </v-row>
-    {{ usersHasCompletedMe }}
   </v-container>
 </template>
 
@@ -413,17 +453,18 @@ export default {
       return (this.game.released = this.game.released.slice(0, 10));
     },
     ratingMedia() {
+      if (this.game.rates.length > 0){
       let res =
-        this.game.rating.reduce((acc, cur) => acc + cur) /
-        this.game.rating.length;
+        this.game.rates.reduce((acc, cur) => acc + cur) /
+        this.game.rates.length;
       if (res % 1 === 0) {
         return res
       } else {
         return res.toFixed(1);
-      }
+      }}
     },
     ratingValues() {
-      const sortedValues = this.game.rating.sort((a,b) => b-a)
+      const sortedValues = this.game.rates.sort((a,b) => b-a)
       return sortedValues.reduce((prev, cur) => ((prev[cur] = prev[cur] + 1 || 1), prev), {})
     },
     timesCompleted() {
@@ -435,6 +476,11 @@ export default {
         this.game.time.length
       );
     },
+    timeValues() {
+      const sortedValues = this.game.time.sort((a,b) => b-a)
+      return sortedValues.reduce((prev, cur) => ((prev[cur] = prev[cur] + 1 || 1), prev), {})
+    },
+    
     usersHasCompletedMe() {
       let result = 0;
       let allGamesOfUsers = [];
@@ -466,6 +512,10 @@ export default {
 .chip {
   color: #a1acb4;
   background-color: #3e5161;
+}
+
+.rating-values {
+ width: 25px;
 }
 
 .button {
