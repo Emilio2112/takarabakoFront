@@ -1,85 +1,105 @@
 <template>
-    <v-container fluid class="container">
-      <v-row>
-        <v-col>
-          <h3 v-if="game.released">{{ releasedDate }}</h3>
-          <h3 v-else>No released date</h3>
-        </v-col>
-      </v-row>
-      <v-row v-if="game.website">
-        <v-col>
-          <a
-            :href="game.website"
-            style="text-decoration: none"
-            target="_blank"
-            rel="noopener noreferrer"
-            >{{ game.name }} <v-icon icon="mdi-web"></v-icon
-          ></a>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col> Original name: {{ game.name_original }} </v-col>
-      </v-row>
-      <v-row>
-        <v-col>
-          <v-chip
-            class="chip ma-1"
-            variant="elevated"
-            v-for="(platform, idx) in game.platforms"
-            :key="idx"
-            size="x-large"
-          >
-            {{ platform.platform.name }}
-          </v-chip>
-        </v-col>
-      </v-row>
+  <Loader v-if="loading"></Loader>
+  <v-container class="container" v-else fluid>
+    <v-row>
+      <v-col>
+        <h3 v-if="game.released">{{ releasedDate }}</h3>
+        <h3 v-else>No released date</h3>
+      </v-col>
+    </v-row>
+    <v-row v-if="game.website">
+      <v-col>
+        <a
+          :href="game.website"
+          style="text-decoration: none"
+          target="_blank"
+          rel="noopener noreferrer"
+          >{{ game.name }} <v-icon icon="mdi-web"></v-icon
+        ></a>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col> Original name: {{ game.name_original }} </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-chip
+          class="chip ma-1"
+          variant="elevated"
+          v-for="(platform, idx) in game.platforms"
+          :key="idx"
+          size="x-large"
+        >
+          {{ platform.platform.name }}
+        </v-chip>
+      </v-col>
+    </v-row>
 
-      <v-row>
-        <v-col cols="3" xl="1" xxl="1" align-self="center">
-          <v-img src="../metascore.png" aspect-ratio="1"></v-img>
-        </v-col>
-        <v-col cols="3" align-self="center">
-          <a
-            :href="game.metacritic_url"
-            style="text-decoration: none"
-            target="_blank"
-            rel="noopener noreferrer"
-            ><h1>{{ game.metacritic }}</h1></a
+    <v-row>
+      <v-col cols="3" xl="1" xxl="1" align-self="center">
+        <v-img src="../metascore.png" aspect-ratio="1"></v-img>
+      </v-col>
+      <v-col cols="3" align-self="center">
+        <a
+          :href="game.metacritic_url"
+          style="text-decoration: none"
+          target="_blank"
+          rel="noopener noreferrer"
+          ><h1>{{ game.metacritic }}</h1></a
+        >
+      </v-col>
+      <v-spacer></v-spacer>
+      <v-col cols="3" v-if="!game.esrb_rating">
+        <v-img src="../Rating_Pending.png" aspect-ratio="1"></v-img>
+      </v-col>
+      <v-col cols="3" v-else-if="game.esrb_rating.id === 1">
+        <v-img src="../Everyone.png" aspect-ratio="1"></v-img>
+      </v-col>
+      <v-col cols="3" v-else-if="game.esrb_rating.id === 2">
+        <v-img src="../Everyone_10+.png" aspect-ratio="1"></v-img>
+      </v-col>
+      <v-col cols="3" v-else-if="game.esrb_rating.id === 3">
+        <v-img src="../Teen.png" aspect-ratio="1"></v-img>
+      </v-col>
+      <v-col cols="3" v-else-if="game.esrb_rating.id === 4">
+        <v-img src="../Mature.png" aspect-ratio="1"></v-img>
+      </v-col>
+      <v-col cols="3" v-else-if="game.esrb_rating.id === 5">
+        <v-img src="../Adults_Only_18+.png" aspect-ratio="1"></v-img>
+      </v-col>
+      <v-col cols="3" v-else-if="game.esrb_rating.id === 0">
+        <v-img src="../Rating_Pending.png" aspect-ratio="1"></v-img>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <Scrollbar maxHeight="200px" always>
+          <v-card color="#A1ACB4">
+            <p class="pa-3">{{ descriptionFixed }}</p>
+          </v-card>
+        </Scrollbar>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="12">
+        Other {{ game.name }} game series:
+        <v-slide-group show-arrows>
+          <v-slide-group-item
+            v-for="(episode, idx) in series"
+            :key="idx"
           >
-        </v-col>
-        <v-spacer></v-spacer>
-        <v-col cols="3" v-if="!game.esrb_rating">
-          <v-img src="../Rating_Pending.png" aspect-ratio="1"></v-img>
-        </v-col>
-        <v-col cols="3" v-else-if="game.esrb_rating.id === 1">
-          <v-img src="../Everyone.png" aspect-ratio="1"></v-img>
-        </v-col>
-        <v-col cols="3" v-else-if="game.esrb_rating.id === 2">
-          <v-img src="../Everyone_10+.png" aspect-ratio="1"></v-img>
-        </v-col>
-        <v-col cols="3" v-else-if="game.esrb_rating.id === 3">
-          <v-img src="../Teen.png" aspect-ratio="1"></v-img>
-        </v-col>
-        <v-col cols="3" v-else-if="game.esrb_rating.id === 4">
-          <v-img src="../Mature.png" aspect-ratio="1"></v-img>
-        </v-col>
-        <v-col cols="3" v-else-if="game.esrb_rating.id === 5">
-          <v-img src="../Adults_Only_18+.png" aspect-ratio="1"></v-img>
-        </v-col>
-        <v-col cols="3" v-else-if="game.esrb_rating.id === 0">
-          <v-img src="../Rating_Pending.png" aspect-ratio="1"></v-img>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col>
-          <Scrollbar maxHeight="200px" always>
-            <v-card color="#A1ACB4">
-              <p class="pa-3">{{ descriptionFixed }}</p>
+            <v-card width="200" height="100" class="ma-2" :to="{name: 'gameview', params: {id: episode.id}}">
+              <v-img :src="episode.background_image" cover>
+                <v-card-title class="title">
+                  {{ episode.name }}
+                </v-card-title></v-img
+              >
             </v-card>
-          </Scrollbar>
-        </v-col>
-      </v-row>
-    </v-container>
+          </v-slide-group-item>
+        </v-slide-group>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -89,10 +109,16 @@ import Loader from "./Loader.vue";
 export default {
   data() {
     return {
+      series: {},
+      loading: true,
     };
   },
   props: {
     game: Object,
+  },
+  async created() {
+    this.series = await apiRAWG.getGameSeries(this.game.id);
+    this.loading = false;
   },
   computed: {
     descriptionFixed() {
@@ -117,9 +143,14 @@ export default {
 
 <style scoped>
 .container {
-  background-color: #76858F;
+  background-color: #76858f;
 }
-.chip{
-  color: #A1ACB4;
-  background-color: #3E5161
-}</style>
+.chip {
+  color: #a1acb4;
+  background-color: #3e5161;
+}
+.title{
+    color: white;
+    background-color: #9e9e9e70
+}
+</style>

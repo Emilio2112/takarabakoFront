@@ -2,11 +2,10 @@
   <v-container v-if="loading">
     <Loader></Loader>
   </v-container>
-  <v-container  v-else>
+  <v-container v-else>
     <v-row justify="end">
       <v-col>
-        <v-img :src="game.background_image">
-        </v-img>
+        <v-img :src="game.background_image"> </v-img>
       </v-col>
     </v-row>
     <v-row>
@@ -178,14 +177,12 @@ export default {
       showButtonPlaying: false,
       showButtonCompleted: false,
       tab: null,
-
       values: {},
     };
   },
   async created() {
     this.game = await gamesAPI.getGame(this.$route.params.id);
     this.user = await authAPI.getUser();
-
     this.loading = false;
   },
   methods: {
@@ -248,7 +245,7 @@ export default {
     ScreenshotsViewer,
     Stats,
     GameData,
-    Creators
+    Creators,
   },
 };
 </script>
@@ -257,7 +254,6 @@ export default {
 .rating {
   display: inline;
 }
-
 
 .button {
   background-color: #3e5161;
