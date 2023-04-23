@@ -14,10 +14,10 @@
     <v-row justify="center" v-if="game.time.length > 0">
       <v-col cols="10" xs="10" sm="8" md="6" lg="6" xl="4">
         <v-card class="d-flex flex-column mx-auto py-8">
-          <div class="d-flex justify-center mt-auto text-h5">Time Average</div>
+          <div class="d-flex justify-center mt-auto"><h3>Time Average</h3> </div>
 
           <div class="d-flex align-center flex-column my-auto">
-            <div class="text-h2 mt-5">{{ mediaTimes }} hours</div>
+            <div class="mt-5"><h2>{{ mediaTimes }} hours</h2></div>
             <div class="px-3">{{ game.time.length }} players</div>
           </div>
 
@@ -28,7 +28,7 @@
           >
             <v-list-item v-for="(times, i) in timeValues" :key="i">
               <v-progress-linear
-                :model-value="times"
+                :model-value="(times/game.time.length)*100"
                 class="mx-n5"
                 color="yellow-darken-3"
                 height="20"
@@ -37,7 +37,6 @@
 
               <template v-slot:prepend>
                 <span>{{ i }}</span>
-                <v-icon icon="mdi-star" class="mx-3"></v-icon>
               </template>
 
               <template v-slot:append>
@@ -51,14 +50,13 @@
       </v-col>
       <v-col cols="12" xs="10" sm="8" md="6" lg="6" xl="4">
         <v-card class="d-flex flex-column mx-auto py-8">
-          <div class="d-flex justify-center mt-auto text-h5">
-            Rating overview
+          <div class="d-flex justify-center mt-auto">
+            <h3>Rating overview</h3>
           </div>
 
           <div class="d-flex align-center flex-column my-auto">
-            <div class="text-h2 mt-5">
-              {{ ratingMedia }}
-              <span class="text-h6 ml-n3">/5</span>
+            <div class="mt-5">
+              <h2>{{ ratingMedia }}</h2>
             </div>
 
             <v-rating
@@ -77,7 +75,7 @@
           >
             <v-list-item v-for="(rating, i) in ratingValues" :key="i">
               <v-progress-linear
-                :model-value="(rating / 5) * 100"
+                :model-value="(rating / game.rates.length) * 100"
                 class="mx-n5"
                 color="yellow-darken-3"
                 height="20"
