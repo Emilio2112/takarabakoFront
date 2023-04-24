@@ -36,7 +36,7 @@
     </v-row>
 
     <v-row>
-      <v-col cols="3" xl="1" xxl="1" align-self="center">
+      <v-col cols="3" sm="2" md="2" lg="2" xl="1" xxl="1" align-self="center">
         <v-img src="../metascore.png" aspect-ratio="1"></v-img>
       </v-col>
       <v-col cols="3" align-self="center">

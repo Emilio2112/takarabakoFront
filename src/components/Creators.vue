@@ -15,7 +15,7 @@
                   <v-avatar size="150" rounded="0">
                     <v-img v-if="creator.image" :src="creator.image" lazy-src="../public/blank"></v-img
                   >
-                <v-img v-else src="../blank.webp"></v-img></v-avatar>
+                <v-img v-else src="/blank.webp"></v-img></v-avatar>
                   <v-list-item  color="white" ></v-list-item>
                 </v-col>
                 <v-col cols="8">

@@ -43,7 +43,9 @@
     </v-row>
 
     <v-row justify="space-around">
-      <v-col cols="auto">
+      
+      <v-row justify="space-around">
+        <v-col cols="auto">
         <v-btn
           v-if="isPlaying"
           class="button"
@@ -146,9 +148,40 @@
           </v-dialog>
         </v-btn>
       </v-col>
-      <v-col cols="auto">
-        <ButtonBack></ButtonBack>
-      </v-col>
+        <v-col cols="auto">
+          <v-dialog
+      v-model="erase"
+      width="auto"
+    >
+      <template v-slot:activator="{ props }">
+        <v-btn v-if="showDeleteButton" class="button" rounded="xs" v-bind="props">
+            Delete
+            <span class="material-icons" id="iconSquare">
+              check_box_outline_blank
+            </span>
+          </v-btn>
+      </template>
+
+      <v-card>
+        <v-card-text>
+          Delete this game from your collection?
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn class="button" rounded="xs" @click="deleteGame">
+      Delete
+      <span class="material-icons" id="iconTriangle">change_history</span>
+    </v-btn>
+    <v-spacer></v-spacer>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+          
+        </v-col>
+        <v-col cols="auto">
+          <ButtonBack></ButtonBack>
+        </v-col>
+      </v-row>
     </v-row>
   </v-container>
 </template>
@@ -165,6 +198,7 @@ import Stats from "../components/Stats.vue";
 import GameData from "../components/GameData.vue";
 import Creators from "../components/Creators.vue";
 import { all } from "axios";
+import { pushScopeId } from "vue";
 
 export default {
   data() {
@@ -178,6 +212,8 @@ export default {
       showButtonCompleted: false,
       tab: null,
       values: {},
+      erase: false,
+      showDeleteButton: false
     };
   },
   async created() {
@@ -212,6 +248,10 @@ export default {
     increment() {
       this.finalTime++;
     },
+    async deleteGame() {
+      await usersAPI.deleteGameFromUser(this.game._id)
+      this.$router.push({ name: "collectionView" })
+    }
   },
   computed: {
     isPlaying() {
@@ -238,6 +278,15 @@ export default {
         return this.showButtonCompleted;
       }
     },
+    isInCollection() {
+      if (this.user.games.includes(this.game._id) === true) {
+        this.showDeleteButton = true
+        return this.showDeleteButton
+      } else {
+        this.showDeleteButton = false
+        return this.showDeleteButton
+      }
+    }
   },
   components: {
     ButtonBack,

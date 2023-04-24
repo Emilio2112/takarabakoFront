@@ -108,6 +108,20 @@ async function getAllUsers() {
     }
 }
 
+async function deleteGameFromUser(id) {
+    const store = useAuthStore()
+    try {
+        const response = await API.patch('users/favorite/delete', {_id:id}, {
+            headers: {
+                token: store.token
+            }
+        })
+        return response.data
+    } catch (error) {
+        return error
+    }
+}
+
 export default {
     addGameToCollection,
     viewCollection,
@@ -115,5 +129,6 @@ export default {
     viewCompleted,
     addGameToPlaying,
     addGameToCompleted,
-    getAllUsers
+    getAllUsers,
+    deleteGameFromUser
 }
