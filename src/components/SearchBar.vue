@@ -1,5 +1,5 @@
 <template>
-  <v-card class="search">
+  <v-card class="search elevation-20">
     <v-container>
       <v-row align-content="center">
         <v-col cols="12" sm="12" md="10" lg="10">

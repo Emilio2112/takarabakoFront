@@ -8,9 +8,12 @@
         <v-img :src="game.background_image"></v-img>
       </v-col>
     </v-row>
-    <v-row>
-      <v-col>
-        <h1>{{ game.name }}</h1>
+    <v-row >
+      <v-col 
+> <div>
+  <h1 style="line-height: normal">{{ game.name }}</h1>
+
+</div>
       </v-col>
     </v-row>
     <v-row>
@@ -153,7 +156,7 @@
           Añadir
           <span class="material-icons" id="iconCross">close</span>
           <v-dialog activator="parent" width="auto">
-            <v-card color="#76858F" class="pa-4">
+            <v-card color="#76858F" class="pa-4 elevation-20">
               <v-card-text> Game added to your collection </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>

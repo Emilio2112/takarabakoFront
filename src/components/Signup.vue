@@ -85,7 +85,7 @@ export default {
       if (response.error) {
         alert("Error");
       } else {
-        this.authStore.login(response.token, response.email);
+        this.authStore.login(response.token, response.email, response.username);
         this.$router.push({ name: "home" });
       }
     },

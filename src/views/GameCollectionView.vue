@@ -10,7 +10,7 @@
     </v-row>
     <v-row>
       <v-col>
-        <h1>
+        <h1 style="line-height: normal">
           {{ game.name }}
         </h1>
       </v-col>
@@ -55,7 +55,7 @@
           Playing
           <span class="material-icons" id="iconCross">close</span>
           <v-dialog activator="parent" width="auto">
-            <v-card color="#76858F" class="pa-4">
+            <v-card color="#76858F" class="pa-4 elevation-20">
               <v-card-text> Game added to playing list </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
@@ -81,7 +81,7 @@
             >check_box_outline_blank
           </span>
           <v-dialog activator="parent" width="auto" persistent>
-            <v-card color="#76858F" class="pa-4">
+            <v-card color="#76858F" class="pa-4 elevation-20">
               <v-card-title>
                 <h3 class="text-center">Game Completed!!!</h3>
               </v-card-title>
@@ -124,7 +124,7 @@
               </v-row>
               <v-slider
                 v-model="finalTime"
-                track-color="grey"
+                track-color="#3E5161"
                 min="0"
                 max="300"
                 :step="1"
@@ -162,7 +162,7 @@
           </v-btn>
       </template>
 
-      <v-card>
+      <v-card color="#76858F" class="pa-4 elevation-20">
         <v-card-text>
           Delete this game from your collection?
         </v-card-text>
@@ -213,12 +213,17 @@ export default {
       tab: null,
       values: {},
       erase: false,
-      showDeleteButton: false
+      showDeleteButton: null
     };
   },
   async created() {
     this.game = await gamesAPI.getGame(this.$route.params.id);
     this.user = await authAPI.getUser();
+    if (this.user.games.includes(this.game._id) === true) {
+        this.showDeleteButton = true
+      } else {
+        this.showDeleteButton = false
+      }
     this.loading = false;
   },
   methods: {
@@ -278,15 +283,6 @@ export default {
         return this.showButtonCompleted;
       }
     },
-    isInCollection() {
-      if (this.user.games.includes(this.game._id) === true) {
-        this.showDeleteButton = true
-        return this.showDeleteButton
-      } else {
-        this.showDeleteButton = false
-        return this.showDeleteButton
-      }
-    }
   },
   components: {
     ButtonBack,
