@@ -140,10 +140,11 @@ export default {
       return ((this.game.time.length / this.usersList.length) * 100).toFixed(2);
     },
     mediaTimes() {
-      return (
+      const media = (
         this.game.time.reduce((prev, curr) => (curr += prev)) /
         this.game.time.length
-      );
+      )
+      return media.toFixed();
     },
     timeValues() {
       const sortedValues = this.game.time.sort((a, b) => b - a);

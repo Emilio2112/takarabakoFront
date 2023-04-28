@@ -5,7 +5,8 @@
     </div>
     <div v-else>
       Completed
-      <Collection :games="games"></Collection>
+      <Collection v-if="games.length > 0" :games="games"></Collection>
+      <h3 v-else style="line-height: normal" class="ma-4">Here you can see your completed games</h3>
       <v-row>
         <v-col>
           <ButtonBack></ButtonBack>

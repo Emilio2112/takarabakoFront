@@ -5,7 +5,8 @@
     </div>
     <div v-else>
       My Collection
-    <Collection :games="games"></Collection>
+    <Collection v-if="games.length > 0" :games="games"></Collection>
+    <h3 v-else style="line-height: normal" class="ma-4">Search your games and add them to your collection</h3>
     <v-row>
       <v-col>
         <ButtonBack></ButtonBack>

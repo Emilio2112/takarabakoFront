@@ -59,7 +59,7 @@
 
       <v-list-item :to="{ name: 'playingView' }">
         <p class="pa-2">
-          Backlog
+          Playing
           <span class="material-icons" id="iconTriangle">change_history</span>
         </p>
       </v-list-item>
