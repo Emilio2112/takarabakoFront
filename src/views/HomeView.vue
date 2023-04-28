@@ -16,7 +16,7 @@
     <v-row class="text-center">
       <v-col>
         <p>
-          Wellcome to Takarabako!!! <br />
+          Welcome to Takarabako!!! <br />
           <v-divider class="ma-2"></v-divider>
           Now you can have your video game collection organized and at your
           fingertips.<br />
@@ -25,7 +25,7 @@
           games to your collection.<br />
           <v-divider class="ma-2"></v-divider>
           Then you can organize your backlog, rate the finished games, indicate
-          their duration... and compare these stats with the comunity.
+          their duration... and compare these stats with the community.
         </p>
       </v-col>
     </v-row>
