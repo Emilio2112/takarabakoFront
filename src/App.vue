@@ -1,7 +1,7 @@
 <template>
   <v-app class="app">
     <NavBar />
-    <v-main class="main">
+    <v-main>
       <v-container>
         <v-row justify="center">
           <v-col
@@ -42,10 +42,6 @@ export default {
 <style scoped>
 .app {
   background-color: #a1acb4;
-}
-
-.main {
-  margin-top: 60px;
 }
 
 .footer {

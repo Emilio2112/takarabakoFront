@@ -54,7 +54,7 @@
       </v-col>
     </v-row>
     <v-divider class="py-2"></v-divider>
-    <Scrollbar class="pa-2" height="50vw" always>
+    <Scrollbar class="pa-2" height="70vh" always>
       <v-container>
     <v-row class="pa-2" v-if="cardView">
       <v-col

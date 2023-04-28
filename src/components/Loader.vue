@@ -53,7 +53,7 @@ export default {
 .symbol__triangle {
   position: relative;
   width: 0;
-  border-bottom: solid 41.6px #40e2a0;
+  border-bottom: solid 41.6px #38DEC6;
   border-right: solid 24px transparent;
   border-left: solid 24px transparent;
 }
@@ -71,12 +71,12 @@ export default {
   height: 25px;
   width: 25px;
   border-width: 8px;
-  border-color: #ff6666;
+  border-color: #EF6F69;
   border-style: solid;
   border-radius: 50%;
 }
 .symbol__cross {
-  background: #7cb2e8;
+  background: #9CADE2;
   height: 48px;
   position: relative;
   width: 8px;
@@ -85,7 +85,7 @@ export default {
 }
 .symbol__cross:after {
   content: "";
-  background: #7cb2e8;
+  background: #9CADE2;
   height: 8px;
   left: -20px;
   position: absolute;
@@ -96,7 +96,7 @@ export default {
   height: 25px;
   width: 25px;
   border-width: 8px;
-  border-color: #ff69f8;
+  border-color: #D591BF;
   border-style: solid;
 }
 
