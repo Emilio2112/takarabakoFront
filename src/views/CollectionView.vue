@@ -4,7 +4,7 @@
       <Loader></Loader>
     </div>
     <div v-else>
-      My Colection
+      My Collection
     <Collection :games="games"></Collection>
     <v-row>
       <v-col>

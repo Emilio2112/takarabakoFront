@@ -156,8 +156,8 @@
       <template v-slot:activator="{ props }">
         <v-btn v-if="showDeleteButton" class="button" rounded="xs" v-bind="props">
             Delete
-            <span class="material-icons" id="iconSquare">
-              check_box_outline_blank
+            <span class="material-icons" id="iconTriangle">
+              change_history
             </span>
           </v-btn>
       </template>

@@ -40,13 +40,15 @@
         <v-img src="../metascore.png" aspect-ratio="1"></v-img>
       </v-col>
       <v-col cols="3" align-self="center">
-        <a
+        <a  v-if="game.metacritic"
           :href="game.metacritic_url"
           style="text-decoration: none"
           target="_blank"
           rel="noopener noreferrer"
-          ><h1>{{ game.metacritic }}</h1></a
+          >
+          <h1>{{ game.metacritic }}</h1></a
         >
+        <h1 v-else>--</h1>
       </v-col>
       <v-spacer></v-spacer>
       <v-col cols="3" v-if="!game.esrb_rating">
@@ -81,7 +83,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12">
+      <v-col v-if="series.length !== 0" cols="12">
         Other {{ game.name }} game series:
         <v-slide-group show-arrows>
           <v-slide-group-item

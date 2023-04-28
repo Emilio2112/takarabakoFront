@@ -1,6 +1,6 @@
 <template>
-  <v-card class="search elevation-20">
-    <v-container>
+<v-card class="search elevation-20">
+    <v-container fluid>
       <v-row align-content="center">
         <v-col cols="12" sm="12" md="10" lg="10">
           <v-text-field
@@ -21,11 +21,11 @@
       </v-row>
     </v-container>
     <v-divider></v-divider>
-    <v-card-text v-show="pages !== 0" style="height: 70vw">
-      <v-container>
+    <v-card-text v-show="pages !== 0" style="height: 60vh">
+      <v-container fluid>
       <v-row>
         <v-col cols="12" sm="6" md="4" lg="4" v-for="(game, idx) in games" :key="idx">
-          <GameCard :game="game"></GameCard>
+          <GameCard :game="game" @click="hideSearch"></GameCard>
         </v-col>
       </v-row>
     </v-container>
@@ -80,6 +80,7 @@ export default {
     games: {},
     page: 1,
     pages: 0,
+    showSearchBar: false
   }),
   methods: {
     async searchGameName() {
@@ -100,6 +101,9 @@ export default {
       this.page = page;
       window.scrollTo(0, 0);
     },
+    hideSearch() {
+      this.$emit("event", this.showSearchBar)
+    }
   },
   components: {
     GameCard,
@@ -110,7 +114,7 @@ export default {
 <style scoped>
 .search {
   background-color: #a1acb4;
-  width: 80vw;
+  width: 100vw;
 }
 .result {
   background-color: #3e5161;

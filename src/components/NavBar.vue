@@ -5,27 +5,29 @@
       @click="showMenu()"
     ></v-app-bar-nav-icon>
 
-    <v-toolbar-title v-if="!store.token">
+    <v-toolbar-title v-if="!store.token" class="text-center">
       <RouterLink class="link" to="/">Takarabako</RouterLink>
     </v-toolbar-title>
-    <v-toolbar-title v-else
-      ><RouterLink class="link" to="/"
-        >{{ store.userName }}´s Takarabako</RouterLink
-      ></v-toolbar-title
-    >
-
-    <v-spacer></v-spacer>
-
+    <v-toolbar-title v-else class="text-center">
+      <RouterLink class="link" to="/">
+        {{ store.userName }}´s Takarabako</RouterLink
+      >
+    </v-toolbar-title>
     <v-btn icon @click="showSearch = !showSearch">
       <v-icon color="#A1ACB4">mdi-magnify</v-icon>
     </v-btn>
   </v-app-bar>
 
   <!-- <SearchBar v-model="showSearch" class="searchBar"></SearchBar> -->
-
-  <v-dialog class="dialog" v-model="showSearch" scrollable>
-    <SearchBar></SearchBar>
-  </v-dialog>
+  <v-container>
+    <v-row justify="center">
+      <v-col>
+        <v-dialog class="dialog" v-model="showSearch" scrollable>
+          <SearchBar @event="hideSearch"></SearchBar>
+        </v-dialog>
+      </v-col>
+    </v-row>
+  </v-container>
   <v-navigation-drawer color="#3E5161" v-model="drawer" temporary>
     <v-list-item>Menu</v-list-item>
     <v-divider></v-divider>
@@ -108,6 +110,9 @@ export default {
         this.showSearch = false;
       }
     },
+    hideSearch(showSearchBar) {
+      this.showSearch = showSearchBar;
+    },
   },
   components: {
     SearchBar,
@@ -119,11 +124,6 @@ export default {
 .toolBar {
   background-color: #3e5161;
   position: fixed;
-}
-.dialog {
-  justify-items: center;
-  left: 10vw;
-  right: 10vw;
 }
 
 .icon {

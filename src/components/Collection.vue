@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container v-if="games.length !== 0">
     <v-row class="pa-2" justify="space-between">
       <v-col cols="3" xs="3" md="6" lg="4">{{ games.length }} Games</v-col>
       <v-col cols="9" xs="9" md="4" lg="5">
@@ -114,6 +114,13 @@
   </v-container>
   </Scrollbar>
   <v-divider class="pa-2 ma-2"></v-divider>
+  </v-container>
+  <v-container v-else>
+    <v-row>
+      <v-col>
+        Search your games using the search bar and add them to your collection
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
