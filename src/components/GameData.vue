@@ -85,7 +85,7 @@
     <v-row>
       <v-col v-if="series.length !== 0" cols="12">
         Other {{ game.name }} game series:
-        <v-slide-group show-arrows>
+        <v-slide-group show-arrows center-active>
           <v-slide-group-item
             v-for="(episode, idx) in series"
             :key="idx"
