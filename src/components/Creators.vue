@@ -13,7 +13,7 @@
               <v-row>
                 <v-col cols="4" sm="4" md="5" lg="4" xl="4" xxl="4">
                   <v-avatar size="150" rounded="0">
-                    <v-img v-if="creator.image" :src="creator.image" lazy-src="../public/blank"></v-img
+                    <v-img v-if="creator.image" :src="creator.image" lazy-src="../blank"></v-img
                   >
                 <v-img v-else src="/blank.webp"></v-img></v-avatar>
                   <v-list-item  color="white" ></v-list-item>
