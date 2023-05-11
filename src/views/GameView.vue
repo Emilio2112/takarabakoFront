@@ -54,13 +54,15 @@
         <v-img src="../metascore.png" aspect-ratio="1"></v-img>
       </v-col>
       <v-col cols="2" align-self="center">
-        <a
+        <a v-if="game.metacritic_url"
           :href="game.metacritic_url"
           style="text-decoration: none"
           target="_blank"
           rel="noopener noreferrer"
-          ><h1>{{ game.metacritic }}</h1></a
+          >
+          <h1>{{ game.metacritic }}</h1></a
         >
+        <h1 v-else>{{ game.metacritic }}</h1>
       </v-col>
       <v-col cols="3" v-if="!game.esrb_rating">
         <v-img src="../Rating_Pending.png" aspect-ratio="1"></v-img>
